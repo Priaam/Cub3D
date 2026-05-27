@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:55:10 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/04 15:03:55 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:41:29 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_map(char *map, t_data *data)
 		return (ft_putstr_fd("Error: invalid extension\n", 2), 0);
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
-		return (ft_putchar_fd("Error: failed to open the map\n", 2), 0);
+		return (ft_putstr_fd("Error: failed to open the map\n", 2), 0);
 	if (!fill_map_data(fd, &data->map))
 	{
 		close(fd);

@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:58 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/04 14:59:01 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:42:06 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data
 void	init_structs(t_data *data);
 
 // Parsing
-int	is_cub_extension(char *map_name);
-int	parse_map(char *map, t_data *data);
+int		is_cub_extension(char *map_name);
+int		parse_map(char *map, t_data *data);
 
 #endif

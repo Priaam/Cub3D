@@ -6,7 +6,7 @@
 #    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/04/24 13:47:50 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/05/27 16:43:57 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ MLX          = $(MLX_PATH)/libmlx.a
 # --- SOURCES ET OBJETS ---
 SRCS         =	main.c \
 				parsing/map_extension.c \
-				parsing/parser.c
+				parsing/parser.c \
+				init_structs/init_structs.c
 
 
 SRCS_FILES   = $(addprefix $(SRCS_DIR), $(SRCS))
@@ -39,7 +40,6 @@ CFLAGS       = -Wall -Wextra -Werror -MMD -MP -g
 INCLUDES     = -I$(INCLUDES_DIR) -I$(LIBFT_PATH)/include -I$(MLX_PATH)
 
 # Flags pour lier les bibliothèques
-# Sous Linux, la MLX a besoin de X11 et math (lm)
 LIB_FLAGS    = -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
 # --- RÈGLES ---
