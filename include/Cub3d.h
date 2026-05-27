@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:58 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/04/24 15:16:41 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:59:01 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,22 @@
 # include "mlx.h"
 # include "math.h"
 
+typedef enum e_type
+{
+	
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C,
+	DATA_COUNT
+	
+}	t_type;
+
 typedef struct s_map
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*f;
-	char	*c;
+	char	*data[DATA_COUNT];
 
 	int		f_color;
 	int		c_color;
