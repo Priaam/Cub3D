@@ -6,11 +6,13 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/27 16:42:37 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:53:30 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+#include "stdio.h"
+
 #include "stdio.h"
 
 int	main(int ac, char **av)
@@ -22,5 +24,10 @@ int	main(int ac, char **av)
 	init_structs(&data);
 	if (!parse_map(av[1], &data))
 		return (1);
+	int i;
+	for (i=0; i < 6; i++)
+	{
+		printf("%s\n", data.map.data[i]);
+	}
 }
 
