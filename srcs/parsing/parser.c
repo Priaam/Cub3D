@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:55:10 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/27 16:41:29 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/05/27 16:45:56 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int	fill_map_data(int fd, t_map *map)
 		trimmed_line = ft_strtrim(line, " \t\n");
 		if (trimmed_line && trimmed_line[0])
 		{
-			if (ft_strncmp(trimmed_line, "NO ", 3) == 0)
+			if (!ft_strncmp(trimmed_line, "NO ", 3))
                 check_and_fill(map, NO, trimmed_line + 3);
-            else if (ft_strncmp(trimmed_line, "SO ", 3) == 0)
+            else if (!ft_strncmp(trimmed_line, "SO ", 3))
                 check_and_fill(map, SO, trimmed_line + 3);
-            else if (ft_strncmp(trimmed_line, "WE ", 3) == 0)
+            else if (!ft_strncmp(trimmed_line, "WE ", 3))
                 check_and_fill(map, WE, trimmed_line + 3);
-            else if (ft_strncmp(trimmed_line, "EA ", 3) == 0)
+            else if (!ft_strncmp(trimmed_line, "EA ", 3))
                 check_and_fill(map, EA, trimmed_line + 3);
-            else if (ft_strncmp(trimmed_line, "F ", 2) == 0)
+            else if (!ft_strncmp(trimmed_line, "F ", 2))
                 check_and_fill(map, F, trimmed_line + 2);
-            else if (ft_strncmp(trimmed_line, "C ", 2) == 0)
+            else if (!ft_strncmp(trimmed_line, "C ", 2))
                 check_and_fill(map, C, trimmed_line + 2);
 		}
 		free(line);
