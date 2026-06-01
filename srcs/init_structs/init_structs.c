@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 14:41:14 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/04/24 14:42:04 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:10:33 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	init_structs(t_data *data)
 {
-	ft_bzero(data, sizeof(data));
+	ft_bzero(data, sizeof(t_data));
 }
