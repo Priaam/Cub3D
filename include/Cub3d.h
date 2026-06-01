@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:58 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/27 16:42:06 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:14:06 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef enum e_type
 {
-	
+
 	NO,
 	SO,
 	WE,
@@ -28,7 +28,7 @@ typedef enum e_type
 	F,
 	C,
 	DATA_COUNT
-	
+
 }	t_type;
 
 typedef struct s_map

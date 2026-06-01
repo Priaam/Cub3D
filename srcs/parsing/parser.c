@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:55:10 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/28 12:36:58 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/01 17:13:42 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	fill_map_data(int fd, t_map *map)
 		if (trimmed_line && trimmed_line[0])
 		{
 			if (!ft_strncmp(trimmed_line, "NO ", 3))
-                status = check_and_fill(map, NO, trimmed_line + 3);
-            else if (!ft_strncmp(trimmed_line, "SO ", 3))
-                status = check_and_fill(map, SO, trimmed_line + 3);
-            else if (!ft_strncmp(trimmed_line, "WE ", 3))
-                status = check_and_fill(map, WE, trimmed_line + 3);
-            else if (!ft_strncmp(trimmed_line, "EA ", 3))
-                status = check_and_fill(map, EA, trimmed_line + 3);
-            else if (!ft_strncmp(trimmed_line, "F ", 2))
-                status = check_and_fill(map, F, trimmed_line + 2);
-            else if (!ft_strncmp(trimmed_line, "C ", 2))
-                status = check_and_fill(map, C, trimmed_line + 2);
+				status = check_and_fill(map, NO, trimmed_line + 3);
+			else if (!ft_strncmp(trimmed_line, "SO ", 3))
+				status = check_and_fill(map, SO, trimmed_line + 3);
+			else if (!ft_strncmp(trimmed_line, "WE ", 3))
+				status = check_and_fill(map, WE, trimmed_line + 3);
+			else if (!ft_strncmp(trimmed_line, "EA ", 3))
+				status = check_and_fill(map, EA, trimmed_line + 3);
+			else if (!ft_strncmp(trimmed_line, "F ", 2))
+				status = check_and_fill(map, F, trimmed_line + 2);
+			else if (!ft_strncmp(trimmed_line, "C ", 2))
+				status = check_and_fill(map, C, trimmed_line + 2);
 			if (status == 1)
 			{
 				free(line);
