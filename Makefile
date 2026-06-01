@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
+#    By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/05/27 16:43:57 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/01 18:57:41 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS_FILES)
 # Compilation de la Libft
 $(LIBFT):
 	@echo "📚 Compilation de la Libft..."
-	@make -C $(LIBFT_PATH)
+	@make -C $(LIBFT_PATH) bonus
 
 # Compilation de la MiniLibX
 $(MLX):

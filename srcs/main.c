@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/05/27 16:53:30 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/01 19:06:01 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int	main(int ac, char **av)
 	for (i=0; i < 6; i++)
 	{
 		printf("%s\n", data.map.data[i]);
+	}
+	printf("\n");
+	int	j;
+	for (j=0; j < data.map.height; j++)
+	{
+		printf("%s", data.map.map_grid[j]);
 	}
 }
 
