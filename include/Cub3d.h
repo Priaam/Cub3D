@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:58 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/01 18:48:21 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/02 20:17:11 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	init_structs(t_data *data);
 // Parsing
 int		is_cub_extension(char *map_name);
 int		parse_map(char *map, t_data *data);
+int		fill_map_data(int fd, t_map *map);
+int		fill_map_grid(int fd, t_map *map);
 
 #endif

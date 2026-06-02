@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+         #
+#    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/01 18:57:41 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/02 20:16:32 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ MLX          = $(MLX_PATH)/libmlx.a
 SRCS         =	main.c \
 				parsing/map_extension.c \
 				parsing/parser.c \
+				parsing/map_data.c \
+				parsing/map_grid.c \
 				init_structs/init_structs.c
 
 
