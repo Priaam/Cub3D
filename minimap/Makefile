@@ -6,7 +6,7 @@ CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror -O3 -g3
 
 # Chemins vers la MiniLibX (Ajusté selon ton arborescence ../../libs/...)
-MLX_DIR     = ../../libs/minilibx-linux
+MLX_DIR     = ../libs/minilibx-linux
 MLX_INC     = -I$(MLX_DIR)
 MLX_LNK     = -L$(MLX_DIR) -lmlx
 

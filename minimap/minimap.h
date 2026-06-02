@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 17:20:22 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/02 18:59:47 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/02 20:21:22 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ int key_press(int keycode, void *param);
 int key_release(int keycode, void *param);
 int loop(void *param);
 int ft_exit(void *param);
-t_dda dda(t_mlx *data);
+t_hit dda(t_mlx *data, t_dda dda_copy);
 #endif

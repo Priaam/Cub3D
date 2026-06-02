@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_render.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:56:26 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/02 17:59:07 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/02 20:24:34 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int render(void *param)
 	int     i;
 	int     j;
 	t_mlx   *data;
+	t_dda   ray;
 
 	data = (t_mlx *)param;
 	i = 0;
@@ -93,7 +94,7 @@ int render(void *param)
 		y += data->coef_minimap;
 	}
 	draw_player(data);
-	dda(data);
+	dda(data, ray);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img, 0, 0);
 	return (0);
 }
