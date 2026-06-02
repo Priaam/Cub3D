@@ -1,0 +1,61 @@
+🟦 Position
+map_x = (int)player_x;
+map_y = (int)player_y;
+
+👉 dans quelle case de la grille tu es
+
+🟩 Direction du rayon
+ray_dir_x = dir_x;
+ray_dir_y = dir_y;
+
+👉 direction du regard
+
+🟨 step (direction dans la grille)
+step_x = +1 ou -1
+step_y = +1 ou -1
+calcul :
+if (ray_dir_x < 0) step_x = -1;
+else step_x = 1;
+
+if (ray_dir_y < 0) step_y = -1;
+else step_y = 1;
+
+👉 dans quel sens tu traverses les cases
+
+🟪 delta_dist (rythme du rayon)
+delta_dist_x = fabs(1 / ray_dir_x);
+delta_dist_y = fabs(1 / ray_dir_y);
+
+👉 distance entre deux frontières de grille le long du rayon
+
+🟥 side_dist (distance actuelle)
+side_dist_x
+side_dist_y
+
+👉 distance jusqu’à la prochaine ligne de grille
+
+📐 INITIALISATION side_dist
+X :
+if (ray_dir_x < 0)
+    side_dist_x = (player_x - map_x) * delta_dist_x;
+else
+    side_dist_x = (map_x + 1 - player_x) * delta_dist_x;
+Y :
+if (ray_dir_y < 0)
+    side_dist_y = (player_y - map_y) * delta_dist_y;
+else
+    side_dist_y = (map_y + 1 - player_y) * delta_dist_y;
+
+    player dans une case
+🟡 2. Calcul distances initiales
+side_dist_x → prochaine frontière verticale
+side_dist_y → prochaine frontière horizontale
+🔵 3. Comparaison
+si X plus proche → aller en X
+sinon → aller en Y
+🟣 4. Avancer dans la grille
+map_x += step_x
+ou
+map_y += step_y
+🟠 5. Ajouter le “coût”
+side_dist += delta_dist
