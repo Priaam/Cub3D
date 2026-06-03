@@ -3,33 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utiles.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 15:40:18 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/01 17:00:46 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/03 16:14:50 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#include "Cub3d.h"
 
-void	ft_swap(char *a, char *b)
-{
-	char temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 void	ft_put_pixel(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
@@ -61,22 +43,3 @@ int	find_biggest(char **map_grid)
 	return (biggest);
 }
 
-char	*ft_strdup(char *str)
-{
-	char	*dup;
-	size_t	i;
-
-	if (!str)
-		return (NULL);
-	dup = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
-	i = 0;
-	if (!dup)
-		return (NULL);
-	while (str[i])
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}

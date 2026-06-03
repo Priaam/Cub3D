@@ -6,7 +6,7 @@
 #    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/02 20:16:32 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/03 15:51:50 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,16 @@ MLX          = $(MLX_PATH)/libmlx.a
 
 # --- SOURCES ET OBJETS ---
 SRCS         =	main.c \
+				init_structs/init_structs.c \
 				parsing/map_extension.c \
 				parsing/parser.c \
 				parsing/map_data.c \
 				parsing/map_grid.c \
-				init_structs/init_structs.c
+				minimap/minimap.c \
+				minimap/minimap_utiles.c \
+				minimap/minimap_render.c \
+				minimap/minimap_hook.c \
+				minimap/minimap_dda.c
 
 
 SRCS_FILES   = $(addprefix $(SRCS_DIR), $(SRCS))
@@ -38,7 +43,7 @@ DEPS         = $(OBJS_FILES:.o=.d)
 
 # --- COMPILATEUR ET FLAGS ---
 CC           = cc
-CFLAGS       = -Wall -Wextra -Werror -MMD -MP -g
+CFLAGS       = -Wall -Wextra -Werror -MMD -MP -g3
 INCLUDES     = -I$(INCLUDES_DIR) -I$(LIBFT_PATH)/include -I$(MLX_PATH)
 
 # Flags pour lier les bibliothèques

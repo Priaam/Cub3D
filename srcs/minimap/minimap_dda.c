@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_dda.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:33:21 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/02 19:03:05 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/03 16:34:53 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#include "Cub3d.h"
 
-t_dda   init_dda(t_mlx *data, t_dda dda_copy) 
+t_dda   init_dda(t_data *data, t_dda dda_copy) 
 {
     t_dda   dda;
  
@@ -40,7 +40,7 @@ t_dda   init_dda(t_mlx *data, t_dda dda_copy)
     return (dda);
 }
 
-t_hit dda(t_mlx *data, t_dda dda_copy)
+t_hit dda(t_data *data, t_dda dda_copy)
 {
     t_dda   dda;
     t_hit     hit;
@@ -62,11 +62,11 @@ t_hit dda(t_mlx *data, t_dda dda_copy)
             dda.map_y += dda.step_y;
             side = 1;
         }
-        if (data->map_grid[dda.map_y][dda.map_x] == '1')
+        if (data->map.map_grid[dda.map_y][dda.map_x] == '1')
             hit.hit = 1;
     }
     hit.delta_dist_x = dda.delta_dist_x;
-    hit.delta_dist_x = dda.delta_dist_y;
+    hit.delta_dist_y = dda.delta_dist_y;
     hit.map_x = dda.map_x;
     hit.map_y = dda.map_y;
     hit.side = side;

@@ -1,15 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/24 12:43:58 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/02 20:17:11 by pserre-s         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
+/* include/Cub3d.h */
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -20,7 +9,6 @@
 
 typedef enum e_type
 {
-
 	NO,
 	SO,
 	WE,
@@ -28,16 +16,22 @@ typedef enum e_type
 	F,
 	C,
 	DATA_COUNT
-
 }	t_type;
+
+typedef struct s_img
+{
+    void    *img;
+    char    *addr;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_img;
 
 typedef struct s_map
 {
 	char	*data[DATA_COUNT];
-
 	int		f_color;
 	int		c_color;
-
 	char	**map_grid;
 	int		height;
 	int		width;
@@ -46,9 +40,22 @@ typedef struct s_map
 typedef struct s_data
 {
 	struct s_map	map;
-
 	void			*mlx_ptr;
 	void			*win_ptr;
+	t_img   		img;
+	int				coef_minimap;
+	int				coef_player;
+    double  		player_x;
+    double  		player_y;
+    double  		angle;
+	double 			dir_x;
+	double			dir_y;
+	int				key_w;
+	int				key_a;
+	int				key_s;
+	int				key_d;
+	int				key_left;
+	int				key_right;
 }	t_data;
 
 // Init structs
@@ -59,5 +66,7 @@ int		is_cub_extension(char *map_name);
 int		parse_map(char *map, t_data *data);
 int		fill_map_data(int fd, t_map *map);
 int		fill_map_grid(int fd, t_map *map);
+
+# include "minimap.h"
 
 #endif
