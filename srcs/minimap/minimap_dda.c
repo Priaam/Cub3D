@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:33:21 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/03 15:42:32 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/03 16:34:53 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_hit dda(t_data *data, t_dda dda_copy)
             hit.hit = 1;
     }
     hit.delta_dist_x = dda.delta_dist_x;
-    hit.delta_dist_x = dda.delta_dist_y;
+    hit.delta_dist_y = dda.delta_dist_y;
     hit.map_x = dda.map_x;
     hit.map_y = dda.map_y;
     hit.side = side;

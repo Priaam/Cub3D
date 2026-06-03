@@ -7,7 +7,7 @@
 # define M_PI 3.14159265358979323846
 #define WIDTH 1920
 #define HEIGHT 1080
-#define TILE_SIZE 1000
+#define TILE_SIZE 500
 
 #define KEY_W 119
 #define KEY_A 97
