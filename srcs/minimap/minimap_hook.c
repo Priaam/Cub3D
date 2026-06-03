@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:57:46 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/02 17:10:58 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/03 16:11:54 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "minimap.h"
+ #include "Cub3d.h"
 
  int ft_exit(void *param)
 {
-	t_mlx *data = (t_mlx *)param;
+	t_data *data = (t_data *)param;
 
 	if (data->img.img)
-		mlx_destroy_image(data->mlx, data->img.img);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
+		mlx_destroy_image(data->mlx_ptr, data->img.img);
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
 	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
 	}
 	exit(0);
 	return (0);
@@ -31,7 +31,7 @@
 
 int key_press(int keycode, void *param)
 {
-	t_mlx *data = (t_mlx *)param;
+	t_data *data = (t_data *)param;
 
 	if (keycode == KEY_W)
 		data->key_w = 1;
@@ -52,7 +52,7 @@ int key_press(int keycode, void *param)
 
 int key_release(int keycode, void *param)
 {
-	t_mlx *data = (t_mlx *)param;
+	t_data *data = (t_data *)param;
 
 	if (keycode == KEY_W)
 		data->key_w = 0;
@@ -84,7 +84,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 
-void ft_clear_image(t_mlx *data)
+void ft_clear_image(t_data *data)
 {
     ft_memset(
         data->img.addr,
@@ -95,23 +95,29 @@ void ft_clear_image(t_mlx *data)
 
 int loop(void *param)
 {
-	t_mlx *data = (t_mlx *)param;
-	double speed = 0.005;
-	double new_x;
-	double new_y;
+	t_data	*data;
+	double	speed;
+	double	new_x;
+	double	new_y;
 
+	data = (t_data *)param;
+	speed = 0.05;
+	
 	if (data->key_left)
-		data->angle -= 0.005;
+		data->angle -= 0.05;
 	if (data->key_right)
-		data->angle += 0.005;
+		data->angle += 0.05;
 	if (data->angle < 0)
 		data->angle += 2 * M_PI;
 	if (data->angle > 2 * M_PI)
 		data->angle -= 2 * M_PI;
+	
 	data->dir_x = cos(data->angle);
 	data->dir_y = sin(data->angle);
+	
 	new_x = data->player_x;
 	new_y = data->player_y;
+
 	if (data->key_w)
 	{
 		new_x += data->dir_x * speed;
@@ -132,10 +138,20 @@ int loop(void *param)
 		new_x -= -data->dir_y * speed;
 		new_y -=  data->dir_x * speed;
 	}
-	if (data->map_grid[(int)new_y][(int)new_x] != '1')
+	if (new_y >= 0 && new_x >= 0)
 	{
-		data->player_x = new_x;
-		data->player_y = new_y;
+
+		if (data->map.map_grid[(int)new_y] != NULL)
+		{
+			if ((int)new_x < (int)ft_strlen(data->map.map_grid[(int)new_y]))
+			{
+				if (data->map.map_grid[(int)new_y][(int)new_x] != '1')
+				{
+					data->player_x = new_x;
+					data->player_y = new_y;
+				}
+			}
+		}
 	}
 	ft_clear_image(data);
 	render(data);

@@ -6,7 +6,7 @@
 #    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/05 16:51:53 by pserre-s          #+#    #+#              #
-#    Updated: 2026/02/10 11:41:30 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/03 16:15:59 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ LIBFT_FILES = ft_isalpha.c \
 	ft_abs.c \
 	ft_first_word.c \
 	ft_tolower_str.c \
-       ft_strjoin_three.c
+    ft_strjoin_three.c \
+	ft_swap.c
 
 LIBFT_BONUS_FILES = ft_lstnew.c \
              ft_lstadd_front.c \

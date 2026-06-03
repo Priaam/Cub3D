@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/01 19:06:01 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/03 15:48:02 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-#include "stdio.h"
 
 #include "stdio.h"
 
@@ -35,5 +34,6 @@ int	main(int ac, char **av)
 	{
 		printf("%s", data.map.map_grid[j]);
 	}
+	launch_minimap(&data);
 }
 
