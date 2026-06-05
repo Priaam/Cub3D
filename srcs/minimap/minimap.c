@@ -6,29 +6,11 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:10:30 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/03 16:12:10 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:10:29 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
-void	ft_init_data(t_data *data)
-{
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp,
-			&data->img.line_len, &data->img.endian);
-	data->angle = 4.0;
-	data->dir_x = cos(data->angle);
-	data->dir_y = sin(data->angle);
-	data->key_a = 0;
-	data->key_w = 0;
-	data->key_s = 0;
-	data->key_d = 0;
-	data->key_left = 0;
-	data->key_right = 0;
-}
 
 int	launch_minimap(t_data *data)
 {
@@ -63,7 +45,7 @@ int	launch_minimap(t_data *data)
 	}
 	data->player_x = p_x;
 	data->player_y = p_y;
-	ft_init_data(data);
+	ft_init_data_minimap(data);
 	data->coef_minimap = TILE_SIZE / find_biggest(data->map.map_grid);
 	if (data->coef_minimap < 1)
 		data->coef_minimap = 1;

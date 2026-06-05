@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/03 15:48:02 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:14:10 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2), 1);
-	init_structs(&data);
+	init_struct_parser(&data);
 	if (!parse_map(av[1], &data))
 		return (1);
 	int i;
@@ -29,10 +29,9 @@ int	main(int ac, char **av)
 		printf("%s\n", data.map.data[i]);
 	}
 	printf("\n");
-	int	j;
-	for (j=0; j < data.map.height; j++)
+	for (i=0; i < data.map.height; i++)
 	{
-		printf("%s", data.map.map_grid[j]);
+		printf("%s", data.map.map_grid[i]);
 	}
 	launch_minimap(&data);
 }
