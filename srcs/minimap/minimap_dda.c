@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_dda.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:33:21 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/03 16:34:53 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 18:19:10 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "Cub3d.h"
 
 #include "Cub3d.h"
 
@@ -19,6 +21,7 @@ t_dda   init_dda(t_data *data, t_dda dda_copy)
     dda = dda_copy;
     dda.map_x = (int)data->player_x;
     dda.map_y = (int)data->player_y;
+    
     if (dda.ray_dir_x < 0)
         dda.step_x = -1;
     else
@@ -27,23 +30,30 @@ t_dda   init_dda(t_data *data, t_dda dda_copy)
         dda.step_y = -1;
     else
         dda.step_y = 1;
-    dda.delta_dist_x = fabs(1 / data->dir_x);
-    dda.delta_dist_y = fabs(1 / data->dir_y);
-    if (data->dir_x < 0)
+    if (dda.ray_dir_x == 0)
+        dda.delta_dist_x = 1e30;
+    else
+        dda.delta_dist_x = fabs(1 / dda.ray_dir_x);
+    if (dda.ray_dir_y == 0)
+        dda.delta_dist_y = 1e30;
+    else
+        dda.delta_dist_y = fabs(1 / dda.ray_dir_y);
+    if (dda.ray_dir_x < 0)
         dda.side_dist_x = (data->player_x - dda.map_x) * dda.delta_dist_x;
     else
         dda.side_dist_x = (dda.map_x + 1 - data->player_x) * dda.delta_dist_x;
-    if (data->dir_y < 0)
+        
+    if (dda.ray_dir_y < 0)
         dda.side_dist_y = (data->player_y - dda.map_y) * dda.delta_dist_y;
     else
-        dda.side_dist_y = (dda.map_y + 1 - data->player_y) * dda.delta_dist_y;
+        dda.side_dist_y = (dda.map_y + 1 - data->player_y) * dda.delta_dist_y;    
     return (dda);
 }
 
 t_hit dda(t_data *data, t_dda dda_copy)
 {
     t_dda   dda;
-    t_hit     hit;
+    t_hit   hit;
     int     side;
 
     dda = init_dda(data, dda_copy);
@@ -62,6 +72,8 @@ t_hit dda(t_data *data, t_dda dda_copy)
             dda.map_y += dda.step_y;
             side = 1;
         }
+        if (dda.map_y < 0 || dda.map_x < 0)
+            break;
         if (data->map.map_grid[dda.map_y][dda.map_x] == '1')
             hit.hit = 1;
     }

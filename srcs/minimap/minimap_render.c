@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_render.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:32:35 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/03 16:32:38 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 18:20:18 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,57 @@ void draw_player(t_data *data)
 			0x00FF00);
 		i++;
 	}
+}
+
+void draw_line(t_data *data, double x1, double y1, double x2, double y2, int color)
+{
+    double delta_x = x2 - x1;
+    double delta_y = y2 - y1;
+    int pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
+    
+    delta_x /= pixels;
+    delta_y /= pixels;
+    
+    double current_x = x1;
+    double current_y = y1;
+    
+    while (pixels > 0)
+    {
+        if (current_x >= 0 && current_x < WIDTH && current_y >= 0 && current_y < HEIGHT)
+            ft_put_pixel(&data->img, (int)current_x, (int)current_y, color);
+        current_x += delta_x;
+        current_y += delta_y;
+        pixels--;
+    }
+}
+
+void draw_rays_on_minimap(t_data *data)
+{
+    int     x;
+    t_dda   ray;
+    t_hit   hit;
+    double  camera_x;
+    double  wall_dist;
+    double player_pixel_x = data->player_x * data->coef_minimap;
+    double player_pixel_y = data->player_y * data->coef_minimap;
+    x = 0;
+    while (x < WIDTH)
+    {
+        camera_x = 2 * x / (double)WIDTH - 1;
+        ray.ray_dir_x = data->dir_x + data->plane_x * camera_x;
+        ray.ray_dir_y = data->dir_y + data->plane_y * camera_x;
+        hit = dda(data, ray);
+        if (hit.side == 0)
+            wall_dist = (hit.map_x - data->player_x + (1 - (ray.ray_dir_x < 0 ? -1 : 1)) / 2) / ray.ray_dir_x;
+        else
+            wall_dist = (hit.map_y - data->player_y + (1 - (ray.ray_dir_y < 0 ? -1 : 1)) / 2) / ray.ray_dir_y;
+        double impact_x = data->player_x + ray.ray_dir_x * wall_dist;
+        double impact_y = data->player_y + ray.ray_dir_y * wall_dist;
+        double impact_pixel_x = impact_x * data->coef_minimap;
+        double impact_pixel_y = impact_y * data->coef_minimap;
+        draw_line(data, player_pixel_x, player_pixel_y, impact_pixel_x, impact_pixel_y, 0xFFFF00);
+        x++;
+    }
 }
 
 void	draw_square(t_data *data, int x, int y, int color)
@@ -100,6 +151,7 @@ int render(void *param)
 		y += data->coef_minimap;
 	}
 	draw_player(data);
+	draw_rays_on_minimap(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	return (0);
 }

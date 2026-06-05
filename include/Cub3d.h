@@ -47,7 +47,9 @@ typedef struct s_data
 	int				coef_player;
     double  		player_x;
     double  		player_y;
-    double  		angle;
+	double	plane_x;
+	double	plane_y;
+	char	orientaion;
 	double 			dir_x;
 	double			dir_y;
 	int				key_w;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:10:30 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/05 15:10:29 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 18:08:23 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	launch_minimap(t_data *data)
 				data->map.map_grid[y][x] == 'S' || data->map.map_grid[y][x] == 'E' ||
 				data->map.map_grid[y][x] == 'W')
 			{
+				data->orientaion = data->map.map_grid[y][x];
 				p_x = x + 0.5;
 				p_y = y + 0.5;
 				break ;

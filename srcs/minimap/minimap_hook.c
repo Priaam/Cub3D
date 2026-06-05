@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:57:46 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/03 16:11:54 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 19:05:49 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,66 +95,73 @@ void ft_clear_image(t_data *data)
 
 int loop(void *param)
 {
-	t_data	*data;
-	double	speed;
-	double	new_x;
-	double	new_y;
+    t_data  *data;
+    double  speed;
+    double  rot_speed;
+    double  old_dir_x;
+    double  old_plane_x;
+    double  new_x;
+    double  new_y;
 
-	data = (t_data *)param;
-	speed = 0.05;
-	
-	if (data->key_left)
-		data->angle -= 0.05;
-	if (data->key_right)
-		data->angle += 0.05;
-	if (data->angle < 0)
-		data->angle += 2 * M_PI;
-	if (data->angle > 2 * M_PI)
-		data->angle -= 2 * M_PI;
-	
-	data->dir_x = cos(data->angle);
-	data->dir_y = sin(data->angle);
-	
-	new_x = data->player_x;
-	new_y = data->player_y;
-
-	if (data->key_w)
-	{
-		new_x += data->dir_x * speed;
-		new_y += data->dir_y * speed;
-	}
-	if (data->key_s)
-	{
-		new_x -= data->dir_x * speed;
-		new_y -= data->dir_y * speed;
-	}
-	if (data->key_d)
-	{
-		new_x += -data->dir_y * speed;
-		new_y +=  data->dir_x * speed;
-	}
-	if (data->key_a)
-	{
-		new_x -= -data->dir_y * speed;
-		new_y -=  data->dir_x * speed;
-	}
-	if (new_y >= 0 && new_x >= 0)
-	{
-
-		if (data->map.map_grid[(int)new_y] != NULL)
-		{
-			if ((int)new_x < (int)ft_strlen(data->map.map_grid[(int)new_y]))
-			{
-				if (data->map.map_grid[(int)new_y][(int)new_x] != '1')
-				{
-					data->player_x = new_x;
-					data->player_y = new_y;
-				}
-			}
-		}
-	}
-	ft_clear_image(data);
-	render(data);
-
-	return (0);
+    data = (t_data *)param;
+    speed = 0.15;
+    rot_speed = 0.05;
+    if (data->key_left)
+    {
+		old_dir_x = data->dir_x;
+        data->dir_x = data->dir_x * cos(-rot_speed) - data->dir_y * sin(-rot_speed);
+        data->dir_y = old_dir_x * sin(-rot_speed) + data->dir_y * cos(-rot_speed);
+                old_plane_x = data->plane_x;
+        data->plane_x = data->plane_x * cos(-rot_speed) - data->plane_y * sin(-rot_speed);
+        data->plane_y = old_plane_x * sin(-rot_speed) + data->plane_y * cos(-rot_speed);
+    }
+        if (data->key_right)
+    {
+        old_dir_x = data->dir_x;
+        data->dir_x = data->dir_x * cos(rot_speed) - data->dir_y * sin(rot_speed);
+        data->dir_y = old_dir_x * sin(rot_speed) + data->dir_y * cos(rot_speed);
+        
+        old_plane_x = data->plane_x;
+        data->plane_x = data->plane_x * cos(rot_speed) - data->plane_y * sin(rot_speed);
+        data->plane_y = old_plane_x * sin(rot_speed) + data->plane_y * cos(rot_speed);
+    }
+    new_x = data->player_x;
+    new_y = data->player_y;
+    if (data->key_w)
+    {
+        new_x += data->dir_x * speed;
+        new_y += data->dir_y * speed;
+    }
+    if (data->key_s)
+    {
+        new_x -= data->dir_x * speed;
+        new_y -= data->dir_y * speed;
+    }
+    if (data->key_d)
+    {
+        new_x += -data->dir_y * speed;
+        new_y +=  data->dir_x * speed;
+    }
+    if (data->key_a)
+    {
+        new_x -= -data->dir_y * speed;
+        new_y -=  data->dir_x * speed;
+    }
+    if (new_y >= 0 && new_x >= 0)
+    {
+        if (data->map.map_grid[(int)new_y] != NULL)
+        {
+            if ((int)new_x < (int)ft_strlen(data->map.map_grid[(int)new_y]))
+            {
+                if (data->map.map_grid[(int)new_y][(int)new_x] != '1')
+                {
+                    data->player_x = new_x;
+                    data->player_y = new_y;
+                }
+            }
+        }
+    }
+    ft_clear_image(data);
+    render(data);
+    return (0);
 }
