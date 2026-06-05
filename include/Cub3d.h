@@ -59,7 +59,8 @@ typedef struct s_data
 }	t_data;
 
 // Init structs
-void	init_structs(t_data *data);
+void	init_struct_parser(t_data *data);
+void	ft_init_data_minimap(t_data *data);
 
 // Parsing
 int		is_cub_extension(char *map_name);
