@@ -44,17 +44,17 @@ typedef struct s_hit
 }	t_hit;
 
 
-int	render(void *param);
-int	find_biggest(char **map_grid);
+int		render(void *param);
+int		find_biggest(char **map_grid);
 void	ft_swap(char *a, char *b);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
-int	ft_exit(void *param);
-void ft_render_and_display(t_data *data);
-int	ft_handle_input(int keycode, void *data);
-int key_press(int keycode, void *param);
-int key_release(int keycode, void *param);
-int loop(void *param);
-t_hit dda(t_data *data, t_dda dda_copy);
+int		ft_exit(void *param);
+void	ft_render_and_display(t_data *data);
+int		ft_handle_input(int keycode, void *data);
+int 	key_press(int keycode, void *param);
+int 	key_release(int keycode, void *param);
+int 	loop(void *param);
+t_hit	dda(t_data *data, t_dda dda_copy);
 
 int	launch_minimap(t_data *data);
 

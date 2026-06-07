@@ -6,7 +6,7 @@
 #    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/07 16:14:51 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/07 17:12:58 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX          = $(MLX_PATH)/libmlx.a
 # --- SOURCES ET OBJETS ---
 SRCS         =	main.c \
 				init_structs/init_structs.c \
-				parsing/map_extension.c \
+				parsing/check_extension.c \
 				parsing/parser.c \
 				parsing/map_data.c \
 				parsing/map_grid.c \
