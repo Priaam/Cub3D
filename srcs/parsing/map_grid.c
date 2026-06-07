@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:04:24 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/02 20:05:46 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/05 15:45:51 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	fill_map_grid(int fd, t_map *map)
 			free(line);
 		line = get_next_line(fd);
 	}
-	map->height = line_count;
 	map->map_grid = malloc((line_count + 1) * sizeof(char *));
 	if (!map->map_grid)
 	{
@@ -76,6 +75,8 @@ int	fill_map_grid(int fd, t_map *map)
 		i++;
 	}
 	map->map_grid[i] = NULL;
+	map->height = line_count;
+	map->width = ft_strlen(map->map_grid[0]);
 	while (map_list)
 	{
 		tmp = map_list;
