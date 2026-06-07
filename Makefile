@@ -6,7 +6,7 @@
 #    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/03 15:51:50 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/07 16:14:51 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS         =	main.c \
 				parsing/parser.c \
 				parsing/map_data.c \
 				parsing/map_grid.c \
+				parsing/check_data.c \
 				minimap/minimap.c \
 				minimap/minimap_utiles.c \
 				minimap/minimap_render.c \
