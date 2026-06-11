@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
+#    By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/07 16:14:51 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/11 18:24:24 by ylebee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS         =	main.c \
 				minimap/minimap_utiles.c \
 				minimap/minimap_render.c \
 				minimap/minimap_hook.c \
-				minimap/minimap_dda.c
+				minimap/minimap_dda.c \
+				3D_render/3d_display.c
 
 
 SRCS_FILES   = $(addprefix $(SRCS_DIR), $(SRCS))
