@@ -5,9 +5,7 @@
 #include <stdlib.h>
 
 # define M_PI 3.14159265358979323846
-#define WIDTH 1920
-#define HEIGHT 1080
-#define TILE_SIZE 1000
+#define TILE_SIZE 400
 
 #define KEY_W 119
 #define KEY_A 97
@@ -37,6 +35,7 @@ typedef struct s_hit
 {
 	double	delta_dist_x;
 	double	delta_dist_y;
+	double	perp_wall_dist;
 	int		map_x;
 	int		map_y;
 	int		hit;

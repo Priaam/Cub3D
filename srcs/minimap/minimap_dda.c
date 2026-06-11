@@ -6,7 +6,7 @@
 /*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 17:33:21 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/05 18:19:10 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/10 18:15:23 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_dda   init_dda(t_data *data, t_dda dda_copy)
     dda = dda_copy;
     dda.map_x = (int)data->player_x;
     dda.map_y = (int)data->player_y;
-    
+
     if (dda.ray_dir_x < 0)
         dda.step_x = -1;
     else
@@ -42,7 +42,6 @@ t_dda   init_dda(t_data *data, t_dda dda_copy)
         dda.side_dist_x = (data->player_x - dda.map_x) * dda.delta_dist_x;
     else
         dda.side_dist_x = (dda.map_x + 1 - data->player_x) * dda.delta_dist_x;
-        
     if (dda.ray_dir_y < 0)
         dda.side_dist_y = (data->player_y - dda.map_y) * dda.delta_dist_y;
     else
@@ -58,6 +57,7 @@ t_hit dda(t_data *data, t_dda dda_copy)
 
     dda = init_dda(data, dda_copy);
     hit.hit = 0;
+    side = 0;
     while (hit.hit == 0)
     {
         if (dda.side_dist_x < dda.side_dist_y)
@@ -77,6 +77,10 @@ t_hit dda(t_data *data, t_dda dda_copy)
         if (data->map.map_grid[dda.map_y][dda.map_x] == '1')
             hit.hit = 1;
     }
+    if (side == 0)
+        hit.perp_wall_dist = dda.side_dist_x - dda.delta_dist_x;
+    else
+        hit.perp_wall_dist = dda.side_dist_y - dda.delta_dist_y;
     hit.delta_dist_x = dda.delta_dist_x;
     hit.delta_dist_y = dda.delta_dist_y;
     hit.map_x = dda.map_x;
