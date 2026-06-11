@@ -85,7 +85,7 @@ int		check_extension(char *map_name, char *extension_name);
 int		parse_map(char *map, t_data *data);
 int		fill_map_data(int fd, t_map *map);
 int		fill_map_grid(int fd, t_map *map);
-int		is_valid_texture(t_data *data);
+int		is_valid_texture(t_map *map);
 
 # include "minimap.h"
 

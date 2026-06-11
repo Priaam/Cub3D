@@ -6,13 +6,35 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/07 17:41:52 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:13:06 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-int	is_valid_texture(t_data *data)
+static int	convert_color(char *color)
+{
+	char	*ptr;
+	int		hexa_color;
+	int		r;
+	int		g;
+	int		b;
+	
+	ptr = color;
+	r = ft_atoi(ptr);
+	ptr = ft_strchr(ptr, ',');
+	if (ptr)
+		ptr++;
+	g = ft_atoi(ptr);
+	ptr = ft_strchr(ptr, ',');
+	if (ptr)
+		ptr++;
+	b = ft_atoi(ptr);
+	hexa_color = (r << 16) | (g << 8) | b;
+	return (hexa_color);
+}
+
+int	is_valid_texture(t_map *map)
 {
 	int	i;
 	int	fd;
@@ -22,18 +44,18 @@ int	is_valid_texture(t_data *data)
 	{
 		if (i == NO || i == SO || i == WE || i == EA)
 		{
-			if (!check_extension(data->map.data[i], ".xpm"))
-				return (1);
-			fd = open(data->map.data[i], O_RDONLY);
+			if (!check_extension(map->data[i], ".xpm"))
+				return (0);
+			fd = open(map->data[i], O_RDONLY);
 			if (fd < 0)
-				return (1);
+				return (0);
 			close(fd);
 		}
-		// else if (i == F || data->map.data[i] == C);
-		// {
-			
-		// }
+		if (i == F)
+			map->f_color = convert_color(map->data[i]);
+		if (i == C)
+			map->c_color = convert_color(map->data[i]);
 		i++;
 	}
-	return (0);
+	return (1);
 }
