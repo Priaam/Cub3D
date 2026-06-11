@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:55:10 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/02 20:14:30 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/11 17:58:17 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parse_map(char *map, t_data *data)
 {
 	int	fd;
 
-	if (!is_cub_extension(map))
+	if (!check_extension(map, ".cub"))
 		return (ft_putstr_fd("Error: invalid extension\n", 2), 0);
 	fd = open(map, O_RDONLY);
 	if (fd < 0)

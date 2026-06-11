@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:14:38 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/02 20:14:44 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/11 18:12:52 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	fill_map_data(int fd, t_map *map)
 			{
 				free(line);
 				free(trimmed_line);
+				if (!is_valid_texture(map))
+					return (0);
 				return (fill_map_grid(fd, map));
 			}
 			if (status == 1)
