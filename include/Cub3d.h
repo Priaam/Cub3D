@@ -5,6 +5,8 @@
 # include "fcntl.h"
 # include "mlx.h"
 # include "math.h"
+#define WIDTH 1920
+#define HEIGHT 1080
 
 typedef struct s_texture
 {
@@ -86,6 +88,9 @@ int		parse_map(char *map, t_data *data);
 int		fill_map_data(int fd, t_map *map);
 int		fill_map_grid(int fd, t_map *map);
 int		is_valid_texture(t_map *map);
+
+void	render_3d(t_data *data);
+
 
 # include "minimap.h"
 
