@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:57:46 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/05 19:05:49 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/12 15:33:30 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,38 +93,36 @@ void ft_clear_image(t_data *data)
     );
 }
 
+void	rotate_camera(t_data *data, double angle)
+{
+    double old_dir_x;
+    double old_plane_x;
+
+    old_dir_x = data->dir_x;
+    data->dir_x = data->dir_x * cos(angle) - data->dir_y * sin(angle);
+    data->dir_y = old_dir_x * sin(angle) + data->dir_y * cos(angle);
+    
+    old_plane_x = data->plane_x;
+    data->plane_x = data->plane_x * cos(angle) - data->plane_y * sin(angle);
+    data->plane_y = old_plane_x * sin(angle) + data->plane_y * cos(angle);
+}
+
 int loop(void *param)
 {
     t_data  *data;
     double  speed;
     double  rot_speed;
-    double  old_dir_x;
-    double  old_plane_x;
     double  new_x;
     double  new_y;
 
     data = (t_data *)param;
     speed = 0.15;
     rot_speed = 0.05;
+	
     if (data->key_left)
-    {
-		old_dir_x = data->dir_x;
-        data->dir_x = data->dir_x * cos(-rot_speed) - data->dir_y * sin(-rot_speed);
-        data->dir_y = old_dir_x * sin(-rot_speed) + data->dir_y * cos(-rot_speed);
-                old_plane_x = data->plane_x;
-        data->plane_x = data->plane_x * cos(-rot_speed) - data->plane_y * sin(-rot_speed);
-        data->plane_y = old_plane_x * sin(-rot_speed) + data->plane_y * cos(-rot_speed);
-    }
-        if (data->key_right)
-    {
-        old_dir_x = data->dir_x;
-        data->dir_x = data->dir_x * cos(rot_speed) - data->dir_y * sin(rot_speed);
-        data->dir_y = old_dir_x * sin(rot_speed) + data->dir_y * cos(rot_speed);
-        
-        old_plane_x = data->plane_x;
-        data->plane_x = data->plane_x * cos(rot_speed) - data->plane_y * sin(rot_speed);
-        data->plane_y = old_plane_x * sin(rot_speed) + data->plane_y * cos(rot_speed);
-    }
+        rotate_camera(data, -rot_speed);
+    if (data->key_right)
+        rotate_camera(data, rot_speed);
     new_x = data->player_x;
     new_y = data->player_y;
     if (data->key_w)

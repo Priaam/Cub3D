@@ -89,6 +89,7 @@ int		fill_map_data(int fd, t_map *map);
 int		fill_map_grid(int fd, t_map *map);
 int		is_valid_texture(t_map *map);
 
+void	rotate_camera(t_data *data, double angle);
 void	render_3d(t_data *data);
 
 

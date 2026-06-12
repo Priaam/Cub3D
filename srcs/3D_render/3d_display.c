@@ -32,7 +32,7 @@ static void	render_range(t_data *data, int x_start, int x_end)
 			draw_end = HEIGHT - 1;
 		y = 0;
 		while (y < draw_start)
-			ft_put_pixel(&data->img, x, y++, 0xff2da1);
+			ft_put_pixel(&data->img, x, y++, data->map.c_color);
 		while (y <= draw_end)
 		{
 			if (hit.side == 0)
@@ -41,7 +41,7 @@ static void	render_range(t_data *data, int x_start, int x_end)
 				ft_put_pixel(&data->img, x, y++, 0x007700);
 		}
 		while (y < HEIGHT)
-			ft_put_pixel(&data->img, x, y++, 0xff8da4);
+			ft_put_pixel(&data->img, x, y++, data->map.f_color);
 		x++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:10:30 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/05 18:08:23 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/06/12 15:47:23 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	launch_minimap(t_data *data)
 	if (data->coef_minimap < 1)
 		data->coef_minimap = 1;
 	data->coef_player = data->coef_minimap / 2;
+	
 	ft_render_and_display(data);
 	return (0);
 }
