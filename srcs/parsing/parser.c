@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:55:10 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/11 17:58:17 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/06/21 17:38:42 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ int	parse_map(char *map, t_data *data)
 		return (ft_putstr_fd("Error: fill map failed\n", 2), 0);
 	}
 	close(fd);
+	if (!flood_fill(data))
+		return (ft_putstr_fd("Error: the map is not closed\n", 2), 0);
 	return (1);
 }

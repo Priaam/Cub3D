@@ -48,7 +48,7 @@ int	is_valid_texture(t_map *map)
 				return (0);
 			fd = open(map->data[i], O_RDONLY);
 			if (fd < 0)
-				return (0);
+				return (close(fd), 0);
 			close(fd);
 		}
 		if (i == F)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+         #
+#    By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/24 12:42:07 by pserre-s          #+#    #+#              #
-#    Updated: 2026/06/12 15:46:34 by pserre-s         ###   ########.fr        #
+#    Updated: 2026/06/21 16:55:58 by pserre-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS         =	main.c \
 				parsing/map_data.c \
 				parsing/map_grid.c \
 				parsing/check_data.c \
+				parsing/flood_fill.c \
 				minimap/minimap.c \
 				minimap/minimap_utiles.c \
 				minimap/minimap_render.c \
