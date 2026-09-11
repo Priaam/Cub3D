@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 20:03:41 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/02/10 11:40:38 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/11 15:51:40 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		ft_tolower(int c);
 int		ft_atoi(const char *nptr);
 int		ft_atoi_base(char *str, char *base);
 int		ft_abs(int number);
+int		ft_tabsize(char **tab);
 
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
