@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:55:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/21 17:56:40 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/11 20:15:10 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,32 @@ static int	check_flood_fill(char **map_copy, int x, int y, t_map *map)
 
 static int	find_player(char **map_copy, int *player_x, int *player_y)
 {
-	*player_y = 0;
-	while (map_copy[*player_y])
+	int	player_number;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	player_number = 0;
+	while (map_copy[y])
 	{
-		*player_x = 0;
-		while (map_copy[*player_y][*player_x])
+		x = 0;
+		while (map_copy[y][x])
 		{
-			if (map_copy[*player_y][*player_x] == 'N'
-				|| map_copy[*player_y][*player_x] == 'S'
-				|| map_copy[*player_y][*player_x] == 'E'
-				|| map_copy[*player_y][*player_x] == 'W'
-				|| map_copy[*player_y][*player_x] == 'P')
-				return (1);
-			(*player_x)++;
+			if (map_copy[y][x] == 'N' || map_copy[y][x] == 'S'
+				|| map_copy[y][x] == 'E' || map_copy[y][x] == 'W')
+			{
+				*player_y = y;
+				*player_x = x;
+				player_number++;
+			}
+			x++;
 		}
-		(*player_y)++;
+		y++;
 	}
-	return (0);
+	if (player_number != 1)
+		return (0);
+	return (1);
 }
 
 int	flood_fill(t_data *data)

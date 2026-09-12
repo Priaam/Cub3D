@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:04:24 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/21 17:32:03 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/12 13:25:41 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ static int	is_map_part(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '1' || line[i] == '0' || line[i] == 'N'
-			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-			return (1);
+		if (line[i] != '1' && line[i] != '0' 
+			&& line[i] != ' ' && line[i] != '\n'
+			&& line[i] != 'N' && line[i] != 'S' 
+			&& line[i] != 'E' && line[i] != 'W')
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	fill_map_grid(int fd, t_map *map)
