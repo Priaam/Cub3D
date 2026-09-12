@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:14:38 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/11 18:12:52 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/12 15:21:52 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	fill_map_data(int fd, t_map *map)
 				status = check_and_fill(map, F, trimmed_line + 2);
 			else if (!ft_strncmp(trimmed_line, "C ", 2))
 				status = check_and_fill(map, C, trimmed_line + 2);
+			else
+				status = 1;
 			if (status == 0)
 				count_elements++;
 			if (count_elements == 6)

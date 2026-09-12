@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/11 19:55:12 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/12 14:07:55 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 	printf("\n");
 	for (i=0; i < data.map.height; i++)
 	{
-		printf("%s", data.map.map_grid[i]);
+		printf("%s\n", data.map.map_grid[i]);
 	}
 	printf("\n\nf=%x | c=%x\n", data.map.f_color, data.map.c_color);
 	printf("\n\nheight = %d | width = %d\n", data.map.height, data.map.width);
