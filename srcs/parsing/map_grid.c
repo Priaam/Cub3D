@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:04:24 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/12 14:06:42 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/12 16:57:44 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,28 @@ static int	find_biggest_lst(t_list *map_list)
 	return (max_len);
 }
 
+static int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line)
+		return (1);
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	fill_map_grid(int fd, t_map *map)
 {
 	int			i;
 	int			x;
 	int			map_started;
+	int			map_ended;
 	int			line_count;
 	char		*line;
 	char		*str;
@@ -65,26 +82,31 @@ int	fill_map_grid(int fd, t_map *map)
 
 	i = 0;
 	map_started = 0;
+	map_ended = 0;
 	line_count = 0;
 	map_list = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (map_started == 1 && !is_map_part(line))
+		if (is_empty_line(line))
 		{
+			if (map_started == 1)
+				map_ended = 1;
 			free(line);
-			ft_lstclear(&map_list, &free);
-			return (0);
 		}
-		if (map_started == 1 || is_map_part(line))
+		else
 		{
+			if (map_ended == 1 || !is_map_part(line))
+			{
+				free(line);
+				ft_lstclear(&map_list, &free);
+				return (0);
+			}
 			map_started = 1;
 			node = ft_lstnew((char *)line);
 			ft_lstadd_back(&map_list, node);
 			line_count++;
 		}
-		else
-			free(line);
 		line = get_next_line(fd);
 	}
 	map->map_grid = malloc((line_count + 1) * sizeof(char *));

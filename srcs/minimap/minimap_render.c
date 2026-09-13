@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:32:35 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/12 15:47:30 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/13 20:09:26 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,21 +146,15 @@ int is_on_circle_border(int x, int y, int cx, int cy, int r)
 	return (dist <= r * r && dist >= (r - 2) * (r - 2));
 }
 
-int safe_get_tile(t_data *data, int x, int y)
+char safe_get_tile(t_data *data, int map_x, int map_y)
 {
-	if (y < 0 || x < 0)
-		return 0;
-
-	if (!data->map.map_grid[y])
-		return 0;
-
-	if (y >= data->map.height)
-		return 0;
-
-	if (x >= (int)ft_strlen(data->map.map_grid[y]))
-		return 0;
-
-	return data->map.map_grid[y][x];
+    if (map_x < 0 || map_y < 0)
+        return (0);
+        
+    if (map_y >= data->map.height || map_x >= data->map.width)
+        return (0);
+        
+    return (data->map.map_grid[map_y][map_x]);
 }
 
 void render_minimap(t_data *data)

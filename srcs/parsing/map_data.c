@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:14:38 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/12 15:21:52 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/12 17:04:12 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,19 @@ int	fill_map_data(int fd, t_map *map)
 		free(trimmed_line);
 		line = get_next_line(fd);
 	}
-	return (1);
+	return (0);
+}
+
+void	free_map_data(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i <= 5)
+	{
+		if (map->data[i])
+			free(map->data[i]);
+		i++;
+	}
+	ft_free_split(map->map_grid);
 }

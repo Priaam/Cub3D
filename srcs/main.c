@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:43:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/12 14:07:55 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/13 20:24:32 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 		return (ft_putstr_fd("Usage: ./cub3d <map.cub>\n", 2), 1);
 	init_struct_parser(&data);
 	if (!parse_map(av[1], &data))
-		return (1);
+		return (free_map_data(&data.map), 1);
 	int i;
 	for (i=0; i < 6; i++)
 	{

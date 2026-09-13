@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:57:46 by ylebee            #+#    #+#             */
-/*   Updated: 2026/06/12 15:33:30 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/13 20:00:23 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+	free_map_data(&data->map);
 	exit(0);
 	return (0);
 }
