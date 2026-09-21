@@ -6,11 +6,13 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:55:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/11 20:15:10 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/22 01:38:20 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Cub3d.h>
+
+static void	free_map_copy(char **map_copy);
 
 static char	**copy_map(t_map *map)
 {
@@ -24,6 +26,12 @@ static char	**copy_map(t_map *map)
 	while (i < map->height)
 	{
 		copy[i] = ft_strdup(map->map_grid[i]);
+		if (!copy[i])
+		{
+			copy[i] = NULL;
+			free_map_copy(copy);
+			return (NULL);
+		}
 		i++;
 	}
 	copy[i] = NULL;
@@ -65,54 +73,28 @@ static int	check_flood_fill(char **map_copy, int x, int y, t_map *map)
 	return (1);
 }
 
-static int	find_player(char **map_copy, int *player_x, int *player_y)
-{
-	int	player_number;
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	player_number = 0;
-	while (map_copy[y])
-	{
-		x = 0;
-		while (map_copy[y][x])
-		{
-			if (map_copy[y][x] == 'N' || map_copy[y][x] == 'S'
-				|| map_copy[y][x] == 'E' || map_copy[y][x] == 'W')
-			{
-				*player_y = y;
-				*player_x = x;
-				player_number++;
-			}
-			x++;
-		}
-		y++;
-	}
-	if (player_number != 1)
-		return (0);
-	return (1);
-}
-
-int	flood_fill(t_data *data)
+static int	validate_map_copy(t_map *map, int start_x, int start_y)
 {
 	char	**map_copy;
-	int		start_x;
-	int		start_y;
 
-	if (!find_player(data->map.map_grid, &start_x, &start_y))
-		return (0);
-
-	map_copy = copy_map(&data->map);
+	map_copy = copy_map(map);
 	if (!map_copy)
 		return (0);
-
-	if (!check_flood_fill(map_copy, start_x, start_y, &data->map))
+	if (!check_flood_fill(map_copy, start_x, start_y, map))
 	{
 		free_map_copy(map_copy);
 		return (0);
 	}
 	free_map_copy(map_copy);
 	return (1);
+}
+
+int	flood_fill(t_data *data)
+{
+	int	start_x;
+	int	start_y;
+
+	if (!find_map_player(data->map.map_grid, &start_x, &start_y))
+		return (0);
+	return (validate_map_copy(&data->map, start_x, start_y));
 }

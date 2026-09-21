@@ -27,9 +27,12 @@ SRCS = main.c \
 	   parsing/check_extension.c \
 	   parsing/parser.c \
 	   parsing/map_data.c \
+	   parsing/map_data_utils.c \
 	   parsing/map_grid.c \
+	   parsing/map_grid_utils.c \
 	   parsing/check_data.c \
 	   parsing/flood_fill.c \
+	   parsing/flood_fill_utils.c \
 	   minimap/minimap.c \
 	   minimap/minimap_utiles.c \
 	   minimap/minimap_render.c \
