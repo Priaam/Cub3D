@@ -1,240 +1,76 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap_render.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03 16:32:35 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/13 20:09:26 by pserre-s         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Cub3d.h"
 
-// void draw_player(t_data *data)
-// {
-// 	int px;
-// 	int py;
-// 	int i;
-// 	int j;
-// 	int len;
-
-// 	px = data->player_x * data->coef_minimap;
-// 	py = data->player_y * data->coef_minimap;
-// 	i = 0;
-// 	while (i < data->coef_player)
-// 	{
-// 		j = 0;
-// 		while (j < data->coef_player)
-// 		{
-// 			ft_put_pixel(&data->img,
-// 				px + j - data->coef_player / 2,
-// 				py + i - data->coef_player / 2,
-// 				0xff2c2c);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	len = data->coef_minimap * 2;
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		ft_put_pixel(&data->img,
-// 			px + (int)(data->dir_x * i),
-// 			py + (int)(data->dir_y * i),
-// 			0x00FF00);
-// 		i++;
-// 	}
-// }
-
-// void draw_line(t_data *data, double x1, double y1, double x2, double y2, int color)
-// {
-//     double delta_x = x2 - x1;
-//     double delta_y = y2 - y1;
-//     int pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-    
-//     delta_x /= pixels;
-//     delta_y /= pixels;
-    
-//     double current_x = x1;
-//     double current_y = y1;
-    
-//     while (pixels > 0)
-//     {
-//         if (current_x >= 0 && current_x < WIDTH && current_y >= 0 && current_y < HEIGHT)
-//             ft_put_pixel(&data->img, (int)current_x, (int)current_y, color);
-//         current_x += delta_x;
-//         current_y += delta_y;
-//         pixels--;
-//     }
-// }
-
-// void	draw_square(t_data *data, int x, int y, int color)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (i < data->coef_minimap)
-// 	{
-// 		j = 0;
-// 		while (j < data->coef_minimap)
-// 		{
-// 			ft_put_pixel(&data->img, x + j, y + i, color);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-// int render(void *param)
-// {
-// 	int     x;
-// 	int     y;
-// 	int     i;
-// 	int     j;
-// 	int     max_width;
-// 	t_data  *data;
-
-// 	data = (t_data *)param;
-	
-// 	max_width = find_biggest(data->map.map_grid);
-	
-// 	i = 0;
-// 	y = 0;
-// 	render_3d(data);
-// 	while (data->map.map_grid[i] && y < HEIGHT)
-// 	{
-// 		j = 0;
-// 		x = 0;
-// 		while (j < max_width && x < WIDTH)
-// 		{
-// 			if (j < (int)ft_strlen(data->map.map_grid[i]) && data->map.map_grid[i][j] == '1')
-// 				draw_square(data, x, y, 0xffffff);
-// 			else if (j < (int)ft_strlen(data->map.map_grid[i]) && ft_strchr("0PNSEW", data->map.map_grid[i][j]))
-// 				draw_square(data, x, y, 0x808080);
-// 			else
-// 				draw_square(data, x, y, 0x000000);
-// 			j++;
-// 			x += data->coef_minimap;
-// 		}
-// 		i++;
-// 		y += data->coef_minimap;
-// 	}
-// 	draw_player(data);
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
-// 	return (0);
-// }
-
-
-int is_in_circle(int x, int y, int cx, int cy, int r)
+static int	is_in_circle(int x, int y, int radius)
 {
-	int dx = x - cx;
-	int dy = y - cy;
+	int	dx;
+	int	dy;
 
-	return (dx * dx + dy * dy <= r * r);
+	dx = x - radius;
+	dy = y - radius;
+	return (dx * dx + dy * dy <= radius * radius);
 }
 
-int is_on_circle_border(int x, int y, int cx, int cy, int r)
+static char	safe_get_tile(t_data *data, int x, int y)
 {
-	int dx = x - cx;
-	int dy = y - cy;
-
-	int dist = dx * dx + dy * dy;
-
-	return (dist <= r * r && dist >= (r - 2) * (r - 2));
+	if (x < 0 || y < 0)
+		return (' ');
+	if (x >= data->map.width || y >= data->map.height)
+		return (' ');
+	return (data->map.map_grid[y][x]);
 }
 
-char safe_get_tile(t_data *data, int map_x, int map_y)
+static void	draw_minimap_pixel(t_data *data, int x, int y, int radius)
 {
-    if (map_x < 0 || map_y < 0)
-        return (0);
-        
-    if (map_y >= data->map.height || map_x >= data->map.width)
-        return (0);
-        
-    return (data->map.map_grid[map_y][map_x]);
+	int		map_x;
+	int		map_y;
+	char	tile;
+
+	map_x = (int)data->player_x
+		+ (x - radius) / data->coef_minimap;
+	map_y = (int)data->player_y
+		+ (y - radius) / data->coef_minimap;
+	tile = safe_get_tile(data, map_x, map_y);
+	if (tile == '1')
+		ft_put_pixel(&data->img, x, y, 0xffffff);
+	else if (tile != ' ')
+		ft_put_pixel(&data->img, x, y, 0x777777);
 }
 
-void render_minimap(t_data *data)
+void	render_minimap(t_data *data)
 {
-	int screen_x;
-	int screen_y;
-	int map_x;
-	int map_y;
+	int	x;
+	int	y;
+	int	radius;
 
-	int radius = 90;
-	int tile = data->coef_minimap;
-	int cx = radius;
-	int cy = radius;
-
-	if (tile <= 0)
-		tile = 1;
-
-	screen_y = 0;
-	while (screen_y < radius * 2)
+	radius = 90;
+	y = 0;
+	while (y < radius * 2)
 	{
-		screen_x = 0;
-		while (screen_x < radius * 2)
+		x = 0;
+		while (x < radius * 2)
 		{
-			if (is_in_circle(screen_x, screen_y, cx, cy, radius))
-			{
-				map_x = (int)data->player_x + (screen_x - cx) / tile;
-				map_y = (int)data->player_y + (screen_y - cy) / tile;
-
-				if (safe_get_tile(data, map_x, map_y) == '1')
-					ft_put_pixel(&data->img, screen_x, screen_y, 0xffffff);
-				else if (safe_get_tile(data, map_x, map_y))
-					ft_put_pixel(&data->img, screen_x, screen_y, 0x777777);
-			}
-
-			if (is_on_circle_border(screen_x, screen_y, cx, cy, radius))
-				ft_put_pixel(&data->img, screen_x, screen_y, 0x00FFAA);
-
-			screen_x++;
+			if (is_in_circle(x, y, radius))
+				draw_minimap_pixel(data, x, y, radius);
+			x++;
 		}
-		screen_y++;
+		y++;
 	}
 }
 
-void draw_player_minimap(t_data *data)
+void	draw_player_minimap(t_data *data)
 {
-	int cx = 90;
-	int cy = 90;
+	int	i;
+	int	j;
 
-	int size = 4;
-
-	int i = -size;
-	while (i <= size)
+	i = -4;
+	while (i <= 4)
 	{
-		int j = -size;
-		while (j <= size)
+		j = -4;
+		while (j <= 4)
 		{
-			ft_put_pixel(&data->img, cx + j, cy + i, 0xff2c2c);
+			ft_put_pixel(&data->img, 90 + j, 90 + i, 0xff2c2c);
 			j++;
 		}
 		i++;
 	}
-}
-
-int render(void *param)
-{
-	t_data *data;
-
-	data = (t_data *)param;
-	render_3d(data);
-	render_minimap(data);
-	draw_player_minimap(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
-	return (0);
-}
-
-void ft_render_and_display(t_data *data)
-{
-	mlx_hook(data->win_ptr, 2, 1L<<0, (int (*)())(void *)key_press, data);
-	mlx_hook(data->win_ptr, 3, 1L<<1, (int (*)())(void *)key_release, data);
-	mlx_hook(data->win_ptr, 17, 0, (int (*)())(void *)ft_exit, data);
-	mlx_loop_hook(data->mlx_ptr, (int (*)())(void *)loop, data);
-	mlx_loop(data->mlx_ptr);
 }

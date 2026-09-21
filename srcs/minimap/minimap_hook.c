@@ -1,21 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap_hook.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/01 16:57:46 by ylebee            #+#    #+#             */
-/*   Updated: 2026/09/13 20:00:23 by pserre-s         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "Cub3d.h"
 
- #include "Cub3d.h"
-
- int ft_exit(void *param)
+int	ft_exit(void *param)
 {
-	t_data *data = (t_data *)param;
+	t_data	*data;
 
+	data = (t_data *)param;
+	free_textures(data);
 	if (data->img.img)
 		mlx_destroy_image(data->mlx_ptr, data->img.img);
 	if (data->win_ptr)
@@ -30,10 +20,11 @@
 	return (0);
 }
 
-int key_press(int keycode, void *param)
+int	key_press(int keycode, void *param)
 {
-	t_data *data = (t_data *)param;
+	t_data	*data;
 
+	data = (t_data *)param;
 	if (keycode == KEY_W)
 		data->key_w = 1;
 	if (keycode == KEY_S)
@@ -51,10 +42,11 @@ int key_press(int keycode, void *param)
 	return (0);
 }
 
-int key_release(int keycode, void *param)
+int	key_release(int keycode, void *param)
 {
-	t_data *data = (t_data *)param;
+	t_data	*data;
 
+	data = (t_data *)param;
 	if (keycode == KEY_W)
 		data->key_w = 0;
 	if (keycode == KEY_S)
@@ -68,99 +60,4 @@ int key_release(int keycode, void *param)
 	if (keycode == KEY_RIGHT)
 		data->key_right = 0;
 	return (0);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*str;
-
-	i = 0;
-	str = (unsigned char *)s;
-	while (i < n)
-	{
-		str[i] = (unsigned char)c;
-		i++;
-	}
-	return (s);
-}
-
-void ft_clear_image(t_data *data)
-{
-    ft_memset(
-        data->img.addr,
-        0,
-        HEIGHT * data->img.line_len
-    );
-}
-
-void	rotate_camera(t_data *data, double angle)
-{
-    double old_dir_x;
-    double old_plane_x;
-
-    old_dir_x = data->dir_x;
-    data->dir_x = data->dir_x * cos(angle) - data->dir_y * sin(angle);
-    data->dir_y = old_dir_x * sin(angle) + data->dir_y * cos(angle);
-    
-    old_plane_x = data->plane_x;
-    data->plane_x = data->plane_x * cos(angle) - data->plane_y * sin(angle);
-    data->plane_y = old_plane_x * sin(angle) + data->plane_y * cos(angle);
-}
-
-int loop(void *param)
-{
-    t_data  *data;
-    double  speed;
-    double  rot_speed;
-    double  new_x;
-    double  new_y;
-
-    data = (t_data *)param;
-    speed = 0.15;
-    rot_speed = 0.05;
-	
-    if (data->key_left)
-        rotate_camera(data, -rot_speed);
-    if (data->key_right)
-        rotate_camera(data, rot_speed);
-    new_x = data->player_x;
-    new_y = data->player_y;
-    if (data->key_w)
-    {
-        new_x += data->dir_x * speed;
-        new_y += data->dir_y * speed;
-    }
-    if (data->key_s)
-    {
-        new_x -= data->dir_x * speed;
-        new_y -= data->dir_y * speed;
-    }
-    if (data->key_d)
-    {
-        new_x += -data->dir_y * speed;
-        new_y +=  data->dir_x * speed;
-    }
-    if (data->key_a)
-    {
-        new_x -= -data->dir_y * speed;
-        new_y -=  data->dir_x * speed;
-    }
-    if (new_y >= 0 && new_x >= 0)
-    {
-        if (data->map.map_grid[(int)new_y] != NULL)
-        {
-            if ((int)new_x < (int)ft_strlen(data->map.map_grid[(int)new_y]))
-            {
-                if (data->map.map_grid[(int)new_y][(int)new_x] != '1')
-                {
-                    data->player_x = new_x;
-                    data->player_y = new_y;
-                }
-            }
-        }
-    }
-    ft_clear_image(data);
-    render(data);
-    return (0);
 }

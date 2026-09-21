@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/11 16:37:32 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/09/21 15:21:53 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	is_rgb_format(char *color)
 {
 	int	i;
 	int	comma;
-	
+
 	i = 0;
 	comma = 0;
-	while(color[i])
+	while (color[i])
 	{
 		if (color[i] == ',')
 			comma++;
@@ -32,31 +32,35 @@ static int	is_rgb_format(char *color)
 	return (1);
 }
 
-static int	convert_color(char *color)
+static int	rgb_to_int(char **rgb_color)
 {
-	char **rgb_color;
 	int	r;
 	int	g;
 	int	b;
 
-	if (!is_rgb_format(color))
-		return (-1);
-		
-	rgb_color = ft_split(color, ',');
-	
-	if (ft_tabsize(rgb_color) != 3)
-		return (ft_free_split(rgb_color), -1);
-
 	r = ft_atoi(rgb_color[0]);
 	g = ft_atoi(rgb_color[1]);
 	b = ft_atoi(rgb_color[2]);
-
-	ft_free_split(rgb_color);
-	
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (-1);
-		
 	return ((r << 16) | (g << 8) | b);
+}
+
+static int	convert_color(char *color)
+{
+	char	**rgb_color;
+	int		result;
+
+	if (!is_rgb_format(color))
+		return (-1);
+	rgb_color = ft_split(color, ',');
+	if (!rgb_color)
+		return (-1);
+	if (ft_tabsize(rgb_color) != 3)
+		return (ft_free_split(rgb_color), -1);
+	result = rgb_to_int(rgb_color);
+	ft_free_split(rgb_color);
+	return (result);
 }
 
 int	is_valid_texture(t_map *map)

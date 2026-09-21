@@ -1,7 +1,7 @@
-NO ./textures/north_wall.xpm
-SO ./textures/south_wall.xpm
-WE ./textures/west_wall.xpm
-EA ./textures/east_wall.xpm
+NO ./textures/blue_wall_02.xpm
+SO ./textures/brown_wall_02.xpm
+WE ./textures/flag_wall_05.xpm
+EA ./textures/gate_wall_02.xpm
 
 F 90,99,105
 C 41,112,255
