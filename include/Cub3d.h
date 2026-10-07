@@ -127,9 +127,17 @@ void	free_textures(t_data *data);
 int		check_extension(char *name, char *extension);
 int		parse_map(char *map, t_data *data);
 int		fill_map_data(int fd, t_map *map);
+int		add_map_line(t_list **map_list, char *line);
+int		check_and_fill(t_map *map, t_type type, char *value);
+int		parse_data_status(t_map *map, char *line);
+void	discard_remaining_lines(int fd);
+int		check_xpm_header(char *path);
 int		fill_map_grid(int fd, t_map *map);
+int		collect_map_lines(int fd, t_list **map_list);
+int		build_map_grid(t_map *map, t_list *map_list, int line_count);
 int		is_valid_texture(t_map *map);
 int		flood_fill(t_data *data);
+int		find_map_player(char **map_copy, int *player_x, int *player_y);
 void	free_map_data(t_map *map);
 
 void	ft_put_pixel(t_img *img, int x, int y, int color);

@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_utiles.c                                   :+:      :+:    :+:   */
+/*   flood_fill_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/22 01:07:28 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:07:29 by pserre-s         ###   ########.fr       */
+/*   Created: 2026/09/22  by pserre-s          #+#    #+#             */
+/*   Updated: 2026/09/22  by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-void	ft_put_pixel(t_img *img, int x, int y, int color)
+int	find_map_player(char **map_copy, int *player_x, int *player_y)
 {
-	char	*pixel;
+	int	player_number;
+	int	x;
+	int	y;
 
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return ;
-	pixel = img->addr + y * img->line_len + x * (img->bpp / 8);
-	*(unsigned int *)pixel = color;
-}
-
-void	ft_clear_image(t_data *data)
-{
-	ft_bzero(data->img.addr, HEIGHT * data->img.line_len);
+	y = 0;
+	player_number = 0;
+	while (map_copy[y])
+	{
+		x = -1;
+		while (map_copy[y][++x])
+		{
+			if (map_copy[y][x] == 'N' || map_copy[y][x] == 'S'
+				|| map_copy[y][x] == 'E' || map_copy[y][x] == 'W')
+			{
+				*player_y = y;
+				*player_x = x;
+				player_number++;
+			}
+		}
+		y++;
+	}
+	return (player_number == 1);
 }

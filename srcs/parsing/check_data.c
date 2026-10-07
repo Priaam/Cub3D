@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/21 15:21:53 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/09/22 01:38:20 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,35 +63,34 @@ static int	convert_color(char *color)
 	return (result);
 }
 
+static int	check_texture_entry(t_map *map, int i)
+{
+	if (i == NO || i == SO || i == WE || i == EA)
+	{
+		if (!check_extension(map->data[i], ".xpm"))
+			return (0);
+		if (!check_xpm_header(map->data[i]))
+			return (0);
+	}
+	if (i == F)
+		map->f_color = convert_color(map->data[i]);
+	if (i == C)
+		map->c_color = convert_color(map->data[i]);
+	if ((i == F && map->f_color == -1)
+		|| (i == C && map->c_color == -1))
+		return (0);
+	return (1);
+}
+
 int	is_valid_texture(t_map *map)
 {
 	int	i;
-	int	fd;
 
 	i = 0;
 	while (i < DATA_COUNT)
 	{
-		if (i == NO || i == SO || i == WE || i == EA)
-		{
-			if (!check_extension(map->data[i], ".xpm"))
-				return (0);
-			fd = open(map->data[i], O_RDONLY);
-			if (fd < 0)
-				return (0);
-			close(fd);
-		}
-		if (i == F)
-		{
-			map->f_color = convert_color(map->data[i]);
-			if (map->f_color == -1)
-				return (0);
-		}
-		if (i == C)
-		{
-			map->c_color = convert_color(map->data[i]);
-			if (map->c_color == -1)
-				return (0);
-		}
+		if (!check_texture_entry(map, i))
+			return (0);
 		i++;
 	}
 	return (1);
