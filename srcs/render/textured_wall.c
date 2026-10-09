@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textured_wall.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/09 18:01:05 by pserre-s          #+#    #+#             */
+/*   Updated: 2026/10/09 18:24:51 by pserre-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cub3d.h"
 
 static int	texture_side(t_dda *ray, t_hit *hit)
@@ -94,12 +106,8 @@ void	draw_textured_wall(t_data *data, t_dda *ray, t_hit *hit, int x)
 	init_tex_column(&column, texture, hit, x);
 	column.tex_x = texture_x(data, ray, hit);
 	wall_height = (int)(HEIGHT / hit->perp_wall_dist);
-	column.draw_start = -wall_height / 2 + HEIGHT / 2;
-	column.draw_end = wall_height / 2 + HEIGHT / 2;
-	if (column.draw_start < 0)
-		column.draw_start = 0;
-	if (column.draw_end >= HEIGHT)
-		column.draw_end = HEIGHT - 1;
+	column.draw_start = hit->draw_start;
+	column.draw_end = hit->draw_end;
 	column.tex_pos = (column.draw_start - HEIGHT / 2
 			+ wall_height / 2) * column.step;
 	draw_texture_column(data, texture, &column);

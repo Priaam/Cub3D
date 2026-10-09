@@ -11,7 +11,7 @@ MLX_PATH = libs/minilibx-linux
 MLX = $(MLX_PATH)/libmlx.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -g3
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -O3
 
 INCLUDES = -I$(INCLUDES_DIR) \
 		   -I$(LIBFT_PATH)/include \

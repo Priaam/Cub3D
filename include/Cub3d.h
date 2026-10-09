@@ -64,19 +64,28 @@ typedef struct s_map
 typedef struct s_data
 {
 	t_map		map;
+
 	void		*mlx_ptr;
 	void		*win_ptr;
+
 	t_img		img;
+
 	t_texture	textures[4];
+
 	int			coef_minimap;
 	int			coef_player;
+
 	double		player_x;
 	double		player_y;
+
 	double		plane_x;
 	double		plane_y;
+
 	char		orientation;
+
 	double		dir_x;
 	double		dir_y;
+
 	int			key_w;
 	int			key_a;
 	int			key_s;
@@ -89,12 +98,16 @@ typedef struct s_dda
 {
 	int		map_x;
 	int		map_y;
+
 	double	delta_dist_x;
 	double	delta_dist_y;
+
 	double	ray_dir_x;
 	double	ray_dir_y;
+
 	double	side_dist_x;
 	double	side_dist_y;
+
 	int		step_x;
 	int		step_y;
 }	t_dda;
@@ -102,9 +115,12 @@ typedef struct s_dda
 typedef struct s_hit
 {
 	double	perp_wall_dist;
+
 	int		map_x;
 	int		map_y;
+
 	int		side;
+
 	int		draw_start;
 	int		draw_end;
 }	t_hit;
@@ -113,16 +129,21 @@ typedef struct s_tex_column
 {
 	int		x;
 	int		tex_x;
+
 	int		draw_start;
 	int		draw_end;
+
 	double	step;
+
 	double	tex_pos;
 }	t_tex_column;
 
 void	init_structs(t_data *data);
+
 int		init_game(t_data *data);
 int		init_textures(t_data *data);
 void	free_textures(t_data *data);
+void	free_game(t_data *data);
 
 int		check_extension(char *name, char *extension);
 int		parse_map(char *map, t_data *data);

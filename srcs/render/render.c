@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
+/*   Updated: 2026/10/09 18:01:26 by pserre-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cub3d.h"
 
 static void	draw_background(t_data *data, int x, t_hit *hit)
@@ -64,7 +76,6 @@ int	render(void *param)
 
 	data = (t_data *)param;
 	update_player(data);
-	ft_clear_image(data);
 	render_3d(data);
 	render_minimap(data);
 	draw_player_minimap(data);

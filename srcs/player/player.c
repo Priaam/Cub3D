@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
+/*   Updated: 2026/10/09 18:34:18 by pserre-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Cub3d.h"
 
 static int	is_wall(t_data *data, double x, double y)
@@ -38,26 +50,37 @@ static void	move_player(t_data *data, double *x, double *y)
 	double	speed;
 	double	move_x;
 	double	move_y;
+	double	length;
 
-	speed = 0.15;
+	speed = 0.05;
 	move_x = 0;
 	move_y = 0;
 	if (data->key_w)
-		move_x += data->dir_x * speed;
-	if (data->key_w)
-		move_y += data->dir_y * speed;
+	{
+		move_x += data->dir_x;
+		move_y += data->dir_y;
+	}
 	if (data->key_s)
-		move_x -= data->dir_x * speed;
-	if (data->key_s)
-		move_y -= data->dir_y * speed;
+	{
+		move_x -= data->dir_x;
+		move_y -= data->dir_y;
+	}
 	if (data->key_d)
-		move_x -= data->dir_y * speed;
-	if (data->key_d)
-		move_y += data->dir_x * speed;
+	{
+		move_x -= data->dir_y;
+		move_y += data->dir_x;
+	}
 	if (data->key_a)
-		move_x += data->dir_y * speed;
-	if (data->key_a)
-		move_y -= data->dir_x * speed;
+	{
+		move_x += data->dir_y;
+		move_y -= data->dir_x;
+	}
+	length = sqrt(move_x * move_x + move_y * move_y);
+	if (length > 0)
+	{
+		move_x = (move_x / length) * speed;
+		move_y = (move_y / length) * speed;
+	}
 	*x += move_x;
 	*y += move_y;
 }

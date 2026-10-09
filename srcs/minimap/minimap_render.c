@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:07:20 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:07:23 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/09 18:36:25 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	draw_minimap_pixel(t_data *data, int x, int y, int radius)
 	int		map_y;
 	char	tile;
 
-	map_x = (int)data->player_x
-		+ (x - radius) / data->coef_minimap;
-	map_y = (int)data->player_y
-		+ (y - radius) / data->coef_minimap;
+	map_x = (int)floor(data->player_x
+			+ (double)(x - radius) / data->coef_minimap);
+	map_y = (int)floor(data->player_y
+			+ (double)(y - radius) / data->coef_minimap);
 	tile = safe_get_tile(data, map_x, map_y);
 	if (tile == '1')
 		ft_put_pixel(&data->img, x, y, 0xffffff);
