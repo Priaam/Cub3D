@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
@@ -21,35 +21,42 @@ LIB_FLAGS = -L$(LIBFT_PATH) -lft \
 			-L$(MLX_PATH) -lmlx \
 			-lXext -lX11 -lm
 
-SRCS = main.c \
-	   init/init.c \
-	   init/init_structs.c \
-	   parsing/check_extension.c \
-	   parsing/parser.c \
-	   parsing/map_data.c \
-	   parsing/map_data_utils.c \
-	   parsing/map_grid.c \
-	   parsing/map_grid_utils.c \
-	   parsing/check_data.c \
-	   parsing/flood_fill.c \
-	   parsing/flood_fill_utils.c \
-	   minimap/minimap.c \
-	   minimap/minimap_utiles.c \
-	   minimap/minimap_render.c \
-	   minimap/minimap_hook.c \
-	   render/raycast.c \
-	   render/render.c \
-	   render/textured_wall.c \
-	   textures/textures.c \
-	   player/player.c
+SRCS_CORE = main.c \
+            init/init.c \
+            init/init_structs.c \
+            parsing/check_extension.c \
+            parsing/parser.c \
+            parsing/map_data.c \
+            parsing/map_data_utils.c \
+            parsing/map_grid.c \
+            parsing/map_grid_utils.c \
+            parsing/parse_colors.c \
+            parsing/flood_fill.c \
+            parsing/flood_fill_utils.c \
+            events/events.c \
+            utils/graphics_utils.c \
+			utils/clean_exit.c \
+            render/raycast.c \
+            render/render.c \
+            render/textured_wall.c \
+            textures/textures.c \
+            player/player.c
 
-OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
-DEPS = $(OBJS:.o=.d)
+SRCS_BONUS = minimap/minimap_bonus.c
+
+OBJS_CORE = $(addprefix $(OBJS_DIR),$(SRCS_CORE:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJS_DIR),$(SRCS_BONUS:.c=.o))
+
+DEPS = $(OBJS_CORE:.o=.d) $(OBJS_BONUS:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX) $(OBJS_CORE)
+	$(CC) $(CFLAGS) $(OBJS_CORE) $(LIB_FLAGS) -o $(NAME)
+
+bonus: CFLAGS += -D BONUS=1
+bonus: $(LIBFT) $(MLX) $(OBJS_CORE) $(OBJS_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_CORE) $(OBJS_BONUS) $(LIB_FLAGS) -o $(NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH) bonus
@@ -74,4 +81,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

@@ -6,11 +6,31 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:04:24 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:40:37 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 14:22:55 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+
+int	get_max_width_arr(char **map_grid)
+{
+	int	i;
+	int	biggest;
+	int	len;
+
+	i = 0;
+	biggest = 0;
+	while (map_grid[i])
+	{
+		len = ft_strlen(map_grid[i]);
+		if (len > biggest)
+			biggest = len;
+		i++;
+	}
+	if (i > biggest)
+		biggest = i;
+	return (biggest);
+}
 
 int	add_map_line(t_list **map_list, char *line)
 {

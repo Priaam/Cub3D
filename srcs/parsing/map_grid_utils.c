@@ -33,7 +33,7 @@ static int	map_line_type(char *line)
 	return (2);
 }
 
-static int	find_biggest_lst(t_list *map_list)
+static int	get_max_width_lst(t_list *map_list)
 {
 	int		max_len;
 	int		len;
@@ -71,17 +71,11 @@ int	collect_map_lines(int fd, t_list **map_list)
 			free(line);
 		}
 		else if (map_ended || map_line_type(line) == 0)
-		{
-			discard_remaining_lines(fd);
-			return (free(line), ft_lstclear(map_list, &free), 0);
-		}
+			return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
 		else
 		{
 			if (!add_map_line(map_list, line))
-			{
-				discard_remaining_lines(fd);
-				return (free(line), ft_lstclear(map_list, &free), 0);
-			}
+				return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
 		}
 		line = get_next_line(fd);
 	}
@@ -112,7 +106,7 @@ int	build_map_grid(t_map *map, t_list *map_list, int line_count)
 	map->map_grid = ft_calloc(line_count + 1, sizeof(char *));
 	if (!map->map_grid)
 		return (ft_lstclear(&map_list, &free), 0);
-	map->width = find_biggest_lst(map_list);
+	map->width = get_max_width_lst(map_list);
 	i = 0;
 	node = map_list;
 	while (node)

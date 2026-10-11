@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:01:26 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 13:49:53 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,23 @@ void	render_3d(t_data *data)
 	}
 }
 
+#ifdef BONUS
+
+static void	render_bonus_features(t_data *data)
+{
+	render_minimap(data);
+	draw_player_minimap(data);
+}
+
+#else
+
+static void	render_bonus_features(t_data *data)
+{
+	(void)data;
+}
+
+#endif
+
 int	render(void *param)
 {
 	t_data	*data;
@@ -77,8 +94,7 @@ int	render(void *param)
 	data = (t_data *)param;
 	update_player(data);
 	render_3d(data);
-	render_minimap(data);
-	draw_player_minimap(data);
+	render_bonus_features(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img, 0, 0);
 	return (0);

@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_hook.c                                     :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:07:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:07:14 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 14:26:00 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
-int	ft_exit(void *param)
-{
-	t_data	*data;
-
-	data = (t_data *)param;
-	free_game(data);
-	exit(0);
-	return (0);
-}
 
 int	key_press(int keycode, void *param)
 {

@@ -158,11 +158,11 @@ int		collect_map_lines(int fd, t_list **map_list);
 int		build_map_grid(t_map *map, t_list *map_list, int line_count);
 int		is_valid_texture(t_map *map);
 int		flood_fill(t_data *data);
-int		find_map_player(char **map_copy, int *player_x, int *player_y);
+int		find_map_player(t_data *data, char **map_grid);
 void	free_map_data(t_map *map);
 
 void	ft_put_pixel(t_img *img, int x, int y, int color);
-int		find_biggest(char **map_grid);
+int		get_max_width_arr(char **map_grid);
 void	ft_clear_image(t_data *data);
 
 void	rotate_camera(t_data *data, double angle);

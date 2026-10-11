@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:14:38 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:08:27 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 14:25:38 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,4 @@ static int	read_map_data(int fd, t_map *map)
 int	fill_map_data(int fd, t_map *map)
 {
 	return (read_map_data(fd, map));
-}
-
-void	free_map_data(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i <= 5)
-	{
-		if (map->data[i])
-			free(map->data[i]);
-		i++;
-	}
-	ft_free_split(map->map_grid);
 }

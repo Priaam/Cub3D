@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_data.c                                       :+:      :+:    :+:   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:38:20 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 14:20:34 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	convert_color(char *color)
 	return (result);
 }
 
-static int	check_texture_entry(t_map *map, int i)
+static int	parse_and_validate_entry(t_map *map, int i)
 {
 	if (i == NO || i == SO || i == WE || i == EA)
 	{
@@ -89,7 +89,7 @@ int	is_valid_texture(t_map *map)
 	i = 0;
 	while (i < DATA_COUNT)
 	{
-		if (!check_texture_entry(map, i))
+		if (!parse_and_validate_entry(map, i))
 			return (0);
 		i++;
 	}

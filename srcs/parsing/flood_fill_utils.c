@@ -12,28 +12,30 @@
 
 #include "Cub3d.h"
 
-int	find_map_player(char **map_copy, int *player_x, int *player_y)
+int find_map_player(t_data *data, char **map_grid)
 {
-	int	player_number;
-	int	x;
-	int	y;
+    int player_number;
+    int x;
+    int y;
 
-	y = 0;
-	player_number = 0;
-	while (map_copy[y])
-	{
-		x = -1;
-		while (map_copy[y][++x])
-		{
-			if (map_copy[y][x] == 'N' || map_copy[y][x] == 'S'
-				|| map_copy[y][x] == 'E' || map_copy[y][x] == 'W')
-			{
-				*player_y = y;
-				*player_x = x;
-				player_number++;
-			}
-		}
-		y++;
-	}
-	return (player_number == 1);
+    y = 0;
+    player_number = 0;
+    while (map_grid[y])
+    {
+        x = -1;
+        while (map_grid[y][++x])
+        {
+            if (map_grid[y][x] == 'N' || map_grid[y][x] == 'S' ||
+                map_grid[y][x] == 'E' || map_grid[y][x] == 'W')
+            {
+                data->player_x = x + 0.5;
+                data->player_y = y + 0.5;
+                data->orientation = map_grid[y][x];
+                map_grid[y][x] = '0';
+                player_number++;
+            }
+        }
+        y++;
+    }
+    return (player_number == 1);
 }

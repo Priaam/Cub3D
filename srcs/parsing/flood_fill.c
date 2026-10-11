@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:55:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/22 01:38:20 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 14:29:19 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,13 @@ static int	validate_map_copy(t_map *map, int start_x, int start_y)
 	if (!map_copy)
 		return (0);
 	if (!check_flood_fill(map_copy, start_x, start_y, map))
-	{
-		free_map_copy(map_copy);
-		return (0);
-	}
-	free_map_copy(map_copy);
-	return (1);
+		return (free_map_copy(map_copy), 0);
+	return (free_map_copy(map_copy), 1);
 }
 
 int	flood_fill(t_data *data)
 {
-	int	start_x;
-	int	start_y;
-
-	if (!find_map_player(data->map.map_grid, &start_x, &start_y))
+	if (!find_map_player(data, data->map.map_grid))
 		return (0);
-	return (validate_map_copy(&data->map, start_x, start_y));
+	return (validate_map_copy(&data->map, (int)data->player_x, (int)data->player_y));
 }
