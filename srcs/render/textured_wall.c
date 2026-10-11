@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:05 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:24:51 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 19:59:43 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	texture_side(t_dda *ray, t_hit *hit)
 {
+	if (hit->is_door)
+        return (DOOR);
 	if (hit->side == 0)
 	{
 		if (ray->ray_dir_x > 0)
@@ -39,6 +41,8 @@ static int	texture_x(t_data *data, t_dda *ray, t_hit *hit)
 		wall_x = data->player_x
 			+ hit->perp_wall_dist * ray->ray_dir_x;
 	wall_x -= floor(wall_x);
+	if (hit->is_door)
+		wall_x -= get_door_offset(data, hit->map_x, hit->map_y);
 	x = (int)(wall_x * data->textures[side].width);
 	if (hit->side == 0 && ray->ray_dir_x > 0)
 		x = data->textures[side].width - x - 1;

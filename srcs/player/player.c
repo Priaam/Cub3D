@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:34:18 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 20:11:47 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	is_wall(t_data *data, double x, double y)
 	if (x < 0 || y < 0 || y >= data->map.height
 		|| x >= data->map.width)
 		return (1);
-	return (data->map.map_grid[(int)y][(int)x] == '1');
+	return (data->map.map_grid[(int)y][(int)x] == '1'
+				|| data->map.map_grid[(int)y][(int)x] == 'D');
 }
 
 int	is_walkable(t_data *data, double x, double y)

@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 13:49:53 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 20:05:24 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	render_bonus_features(t_data *data)
 {
 	render_minimap(data);
 	draw_player_minimap(data);
+	update_doors(data);
 }
 
 #else

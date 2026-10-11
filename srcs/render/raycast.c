@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:56 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:00:58 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 19:58:55 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,19 @@ t_hit	dda(t_data *data, t_dda ray)
 
 	dda_data = init_dda(data, ray);
 	hit.side = 0;
+	hit.is_door = 0;
 	while (inside_map(data, dda_data.map_x, dda_data.map_y))
 	{
 		dda_step(&dda_data, &hit);
-		if (inside_map(data, dda_data.map_x, dda_data.map_y)
-			&& data->map.map_grid[dda_data.map_y][dda_data.map_x] == '1')
+		if (!inside_map(data, dda_data.map_x, dda_data.map_y))
 			break ;
+		if (data->map.map_grid[dda_data.map_y][dda_data.map_x] == '1')
+			break ;
+		if (data->map.map_grid[dda_data.map_y][dda_data.map_x] == 'D')
+		{
+			if (check_sliding_door(data, &dda_data, &ray, &hit))
+				break ;
+		}
 	}
 	hit.map_x = dda_data.map_x;
 	hit.map_y = dda_data.map_y;

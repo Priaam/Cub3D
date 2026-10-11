@@ -12,27 +12,6 @@
 
 #include "Cub3d.h"
 
-static int	map_line_type(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
-		i++;
-	if (!line[i])
-		return (1);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != '1' && line[i] != '0' && line[i] != ' '
-			&& line[i] != '\n' && line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'E' && line[i] != 'W')
-			return (0);
-		i++;
-	}
-	return (2);
-}
-
 static int	get_max_width_lst(t_list *map_list)
 {
 	int		max_len;

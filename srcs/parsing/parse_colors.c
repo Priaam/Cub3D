@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:20:34 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 19:28:45 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	convert_color(char *color)
 	char	**rgb_color;
 	int		result;
 
-	if (!is_rgb_format(color))
+	if (!color || !is_rgb_format(color))
 		return (-1);
 	rgb_color = ft_split(color, ',');
 	if (!rgb_color)

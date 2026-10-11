@@ -30,6 +30,7 @@ SRCS_CORE = main.c \
             parsing/map_data_utils.c \
             parsing/map_grid.c \
             parsing/map_grid_utils.c \
+			parsing/map_grid_utils2.c \
             parsing/parse_colors.c \
             parsing/flood_fill.c \
             parsing/flood_fill_utils.c \
@@ -40,9 +41,10 @@ SRCS_CORE = main.c \
             render/render.c \
             render/textured_wall.c \
             textures/textures.c \
-            player/player.c
+            player/player.c \
+			bonus/doors/doors.c
 
-SRCS_BONUS = minimap/minimap_bonus.c
+SRCS_BONUS = bonus/minimap/minimap_bonus.c 
 
 OBJS_CORE = $(addprefix $(OBJS_DIR),$(SRCS_CORE:.c=.o))
 OBJS_BONUS = $(addprefix $(OBJS_DIR),$(SRCS_BONUS:.c=.o))

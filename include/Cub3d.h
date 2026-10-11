@@ -16,6 +16,7 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_SPACE 32
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
@@ -31,12 +32,22 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	double	offset; // De 0.0 (fermée) à 1.0 (ouverte)
+	int		state;  // 1 (en ouverture), -1 (en fermeture), 0 (inactif)
+}	t_door;
+
 typedef enum e_type
 {
 	NO,
 	SO,
 	WE,
 	EA,
+	DOOR,
 	F,
 	C,
 	DATA_COUNT
@@ -70,7 +81,9 @@ typedef struct s_data
 
 	t_img		img;
 
-	t_texture	textures[4];
+	t_texture	textures[5];
+
+	t_door		doors[32];
 
 	int			coef_minimap;
 	int			coef_player;
@@ -123,6 +136,8 @@ typedef struct s_hit
 
 	int		draw_start;
 	int		draw_end;
+
+	int		is_door;
 }	t_hit;
 
 typedef struct s_tex_column
@@ -153,6 +168,7 @@ int		check_and_fill(t_map *map, t_type type, char *value);
 int		parse_data_status(t_map *map, char *line);
 void	discard_remaining_lines(int fd);
 int		check_xpm_header(char *path);
+int		map_line_type(char *line);
 int		fill_map_grid(int fd, t_map *map);
 int		collect_map_lines(int fd, t_list **map_list);
 int		build_map_grid(t_map *map, t_list *map_list, int line_count);
@@ -179,5 +195,10 @@ void	draw_player_minimap(t_data *data);
 int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
 int		ft_exit(void *param);
+
+int		interact_door(t_data *data);
+int		check_sliding_door(t_data *data, t_dda *dda, t_dda *ray, t_hit *hit);
+double	get_door_offset(t_data *data, int x, int y);
+void	update_doors(t_data *data);
 
 #endif

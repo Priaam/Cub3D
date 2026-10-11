@@ -6,11 +6,23 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:14:38 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:25:38 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 19:27:48 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+
+#ifdef BONUS
+static int	get_req_elems(void)
+{
+	return (7);
+}
+#else
+static int	get_req_elems(void)
+{
+	return (6);
+}
+#endif
 
 int	check_and_fill(t_map *map, t_type type, char *value)
 {
@@ -50,7 +62,7 @@ static int	read_map_data(int fd, t_map *map)
 	while (line)
 	{
 		status = parse_data_line(map, line, &count_elements);
-		if (count_elements == 6)
+		if (count_elements == get_req_elems())
 		{
 			free(line);
 			if (!is_valid_texture(map))

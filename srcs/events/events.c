@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:07:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:26:00 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 18:55:36 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	key_press(int keycode, void *param)
 		data->key_a = 1;
 	if (keycode == KEY_D)
 		data->key_d = 1;
+	if (keycode == KEY_SPACE)
+		interact_door(data);
 	if (keycode == KEY_LEFT)
 		data->key_left = 1;
 	if (keycode == KEY_RIGHT)
