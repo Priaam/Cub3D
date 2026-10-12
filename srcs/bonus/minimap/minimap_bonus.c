@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_render.c                                   :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:07:20 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:36:25 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/12 12:24:31 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	draw_player_minimap(t_data *data)
 	int	i;
 	int	j;
 
-	i = -4;
-	while (i <= 4)
+	i = 0;
+	while (i < 5)
 	{
-		j = -4;
-		while (j <= 4)
+		j = 0;
+		while (j < 5)
 		{
 			ft_put_pixel(&data->img, 90 + j, 90 + i, 0xff2c2c);
 			j++;

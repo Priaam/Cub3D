@@ -1,64 +1,65 @@
-NAME = cub3D
+NAME        = cub3D
+SRCS_DIR    = srcs/
+INCLUDES_DIR= include/
 
-SRCS_DIR = srcs/
-OBJS_DIR = objs/
-INCLUDES_DIR = include/
+LIBFT_PATH  = libs/Libft
+LIBFT       = $(LIBFT_PATH)/libft.a
+MLX_PATH    = libs/minilibx-linux
+MLX         = $(MLX_PATH)/libmlx.a
 
-LIBFT_PATH = libs/Libft
-LIBFT = $(LIBFT_PATH)/libft.a
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -MMD -MP -O3 -std=gnu11
+INCLUDES    = -I$(INCLUDES_DIR) \
+              -I$(LIBFT_PATH)/include \
+              -I$(MLX_PATH)
+LIB_FLAGS   = -L$(LIBFT_PATH) -lft \
+              -L$(MLX_PATH) -lmlx \
+              -lXext -lX11 -lm
 
-MLX_PATH = libs/minilibx-linux
-MLX = $(MLX_PATH)/libmlx.a
+SRCS_CORE   = main.c \
+              init/init.c \
+              init/init_structs.c \
+              parsing/check_extension.c \
+              parsing/parser.c \
+              parsing/map_data.c \
+              parsing/map_data_utils.c \
+              parsing/map_grid.c \
+              parsing/map_grid_utils.c \
+              parsing/map_grid_utils2.c \
+              parsing/parse_colors.c \
+              parsing/flood_fill.c \
+              parsing/flood_fill_utils.c \
+              events/events.c \
+              utils/graphics_utils.c \
+              utils/clean_exit.c \
+              render/raycast.c \
+              render/render.c \
+              render/textured_wall.c \
+              textures/textures.c \
+              player/player.c \
+              bonus/doors/doors.c
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -O3
+SRCS_BONUS  = bonus/minimap/minimap_bonus.c
 
-INCLUDES = -I$(INCLUDES_DIR) \
-		   -I$(LIBFT_PATH)/include \
-		   -I$(MLX_PATH)
+ifdef WITH_BONUS
+	OBJS_DIR = objs_bonus/
+	CFLAGS += -D BONUS=1
+	SRCS = $(SRCS_CORE) $(SRCS_BONUS)
+else
+	OBJS_DIR = objs/
+	SRCS = $(SRCS_CORE)
+endif
 
-LIB_FLAGS = -L$(LIBFT_PATH) -lft \
-			-L$(MLX_PATH) -lmlx \
-			-lXext -lX11 -lm
-
-SRCS_CORE = main.c \
-            init/init.c \
-            init/init_structs.c \
-            parsing/check_extension.c \
-            parsing/parser.c \
-            parsing/map_data.c \
-            parsing/map_data_utils.c \
-            parsing/map_grid.c \
-            parsing/map_grid_utils.c \
-			parsing/map_grid_utils2.c \
-            parsing/parse_colors.c \
-            parsing/flood_fill.c \
-            parsing/flood_fill_utils.c \
-            events/events.c \
-            utils/graphics_utils.c \
-			utils/clean_exit.c \
-            render/raycast.c \
-            render/render.c \
-            render/textured_wall.c \
-            textures/textures.c \
-            player/player.c \
-			bonus/doors/doors.c
-
-SRCS_BONUS = bonus/minimap/minimap_bonus.c 
-
-OBJS_CORE = $(addprefix $(OBJS_DIR),$(SRCS_CORE:.c=.o))
-OBJS_BONUS = $(addprefix $(OBJS_DIR),$(SRCS_BONUS:.c=.o))
-
-DEPS = $(OBJS_CORE:.o=.d) $(OBJS_BONUS:.o=.d)
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+DEPS = $(OBJS:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(MLX) $(OBJS_CORE)
-	$(CC) $(CFLAGS) $(OBJS_CORE) $(LIB_FLAGS) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAGS) -o $(NAME)
 
-bonus: CFLAGS += -D BONUS=1
-bonus: $(LIBFT) $(MLX) $(OBJS_CORE) $(OBJS_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_CORE) $(OBJS_BONUS) $(LIB_FLAGS) -o $(NAME)
+bonus:
+	$(MAKE) WITH_BONUS=1 all
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_PATH) bonus
@@ -73,7 +74,7 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 -include $(DEPS)
 
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -rf objs/ objs_bonus/
 	$(MAKE) -C $(LIBFT_PATH) clean
 	$(MAKE) -C $(MLX_PATH) clean
 

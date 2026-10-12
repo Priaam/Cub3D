@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 18:45:00 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 20:04:26 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/12 13:09:03 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ double	get_door_offset(t_data *data, int x, int y)
 }
 
 #ifdef BONUS
+
 static int	find_door_slot(t_data *data, int tx, int ty)
 {
 	int	i;
@@ -66,7 +67,7 @@ int	interact_door(t_data *data)
 		data->doors[slot].state = 1;
 	else
 	{
-		data->map.map_grid[ty][tx] = 'D'; // Redevient solide pour le raycaster
+		data->map.map_grid[ty][tx] = 'D';
 		data->doors[slot].offset = 1.0;
 		data->doors[slot].state = -1;
 	}
@@ -126,7 +127,9 @@ int	check_sliding_door(t_data *data, t_dda *dda, t_dda *ray, t_hit *hit)
 	}
 	return (0);
 }
+
 #else
+
 int	interact_door(t_data *data)
 {
 	(void)data;
