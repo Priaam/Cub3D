@@ -39,7 +39,8 @@ SRCS_CORE   = main.c \
               player/player.c \
               bonus/doors/doors.c
 
-SRCS_BONUS  = bonus/minimap/minimap_bonus.c
+SRCS_BONUS  = bonus/minimap/minimap_bonus.c \
+              bonus/events/events.c
 
 ifdef WITH_BONUS
 	OBJS_DIR = objs_bonus/

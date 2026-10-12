@@ -6,7 +6,7 @@
 /*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/12 15:57:26 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/12 17:07:11 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	render_bonus_features(t_data *data)
 	render_minimap(data);
 	draw_player_minimap(data);
 	update_doors(data);
+	mouse_move(data);
 }
 
 #else
@@ -94,7 +95,6 @@ int	render(void *param)
 
 	data = (t_data *)param;
 	update_player(data);
-	mouse_move(data);
 	render_3d(data);
 	render_bonus_features(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
