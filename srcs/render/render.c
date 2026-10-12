@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 20:05:24 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/12 15:57:26 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	render(void *param)
 
 	data = (t_data *)param;
 	update_player(data);
+	mouse_move(data);
 	render_3d(data);
 	render_bonus_features(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,

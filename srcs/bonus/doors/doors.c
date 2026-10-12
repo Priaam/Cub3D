@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 18:45:00 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/12 13:09:03 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/12 14:53:50 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	interact_door(t_data *data)
 	int	ty;
 	int	slot;
 
-	tx = (int)(data->player_x + data->dir_x * 0.7);
-	ty = (int)(data->player_y + data->dir_y * 0.7);
+	tx = (int)(data->player_x + data->dir_x * 1.5);
+	ty = (int)(data->player_y + data->dir_y * 1.5);
 	if (data->map.map_grid[ty][tx] != 'D' && data->map.map_grid[ty][tx] != 'O')
 		return (0);
 	slot = find_door_slot(data, tx, ty);

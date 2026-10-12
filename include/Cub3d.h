@@ -194,6 +194,7 @@ void	draw_player_minimap(t_data *data);
 
 int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
+int		mouse_move(void *param);
 int		ft_exit(void *param);
 
 int		interact_door(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/12 12:19:38 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/12 14:54:53 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	update_player(t_data *data)
 	double	new_y;
 
 	if (data->key_left)
-		rotate_camera(data, -0.05);
+		rotate_camera(data, -0.025);
 	if (data->key_right)
-		rotate_camera(data, 0.05);
+		rotate_camera(data, 0.025);
 	new_x = data->player_x;
 	new_y = data->player_y;
 	move_player(data, &new_x, &new_y);
