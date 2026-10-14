@@ -12,18 +12,6 @@
 
 #include "Cub3d.h"
 
-#ifdef BONUS
-static int	get_req_elems(void)
-{
-	return (7);
-}
-#else
-static int	get_req_elems(void)
-{
-	return (6);
-}
-#endif
-
 int	check_and_fill(t_map *map, t_type type, char *value)
 {
 	if (map->data[type] != NULL)
@@ -61,17 +49,19 @@ static int	read_map_data(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		status = parse_data_line(map, line, &count_elements);
-		if (count_elements == get_req_elems())
+		if (map_line_type(line) == 2)
 		{
-			free(line);
-			if (!is_valid_texture(map))
-				return (discard_remaining_lines(fd), 0);
-			return (fill_map_grid(fd, map));
+			if ((count_elements != 6 && count_elements != 7)
+				|| !map->data[NO] || !map->data[SO] || !map->data[WE]
+				|| !map->data[EA] || !map->data[F] || !map->data[C]
+				|| !is_valid_texture(map))
+				return (free(line), discard_remaining_lines(fd), 0);
+			return (fill_map_grid(fd, map, line));
 		}
-		if (status == 1)
-			return (free(line), discard_remaining_lines(fd), 0);
+		status = parse_data_line(map, line, &count_elements);
 		free(line);
+		if (status || count_elements > 7)
+			return (discard_remaining_lines(fd), 0);
 		line = get_next_line(fd);
 	}
 	return (0);

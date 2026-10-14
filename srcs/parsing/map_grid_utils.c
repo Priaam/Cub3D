@@ -34,13 +34,13 @@ static int	get_max_width_lst(t_list *map_list)
 	return (max_len);
 }
 
-int	collect_map_lines(int fd, t_list **map_list)
+int	collect_map_lines(int fd, t_list **map_list, char *first_line)
 {
 	int		map_ended;
 	char	*line;
 
 	map_ended = 0;
-	line = get_next_line(fd);
+	line = first_line;
 	while (line)
 	{
 		if (map_line_type(line) == 1)
