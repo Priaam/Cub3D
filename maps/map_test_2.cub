@@ -1,11 +1,11 @@
-NO ./textures/blue_wall_02.xpm
-SO ./textures/brown_wall_02.xpm
-WE ./textures/flag_wall_05.xpm
-EA ./textures/gate_wall_02.xpm
-DO ./textures/door2.xpm
+NO ./textures/wall1.xpm
+SO ./textures/wall2.xpm
+WE ./textures/wall3.xpm
+EA ./textures/wall4.xpm
+DO ./textures/floor5.xpm
 
-F 90,99,105
-C 41,112,255
+F 0,0,0
+C 0,0,0
 
 11111111111111111111111111111111111111111111111111
 10000000000000000000000000000000000000000000000001

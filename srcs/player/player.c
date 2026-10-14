@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/12 14:54:53 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/14 12:30:50 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	move_player(t_data *data, double *x, double *y)
 	double	move_y;
 	double	length;
 
-	speed = 0.025;
+	speed = SPEED;
 	move_x = 0;
 	move_y = 0;
 	if (data->key_w)

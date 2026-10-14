@@ -12,6 +12,10 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
+# define SPEED 0.1
+
+# define WEAPON_SCALE 3
+
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -20,6 +24,13 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
+
+typedef struct s_weapon
+{
+    void    *img;
+    int     width;
+    int     height;
+}   t_weapon;
 
 typedef struct s_texture
 {
@@ -84,6 +95,8 @@ typedef struct s_data
 	t_texture	textures[5];
 
 	t_door		doors[32];
+
+	t_weapon	weapon;
 
 	int			coef_minimap;
 	int			coef_player;
@@ -153,7 +166,11 @@ typedef struct s_tex_column
 	double	tex_pos;
 }	t_tex_column;
 
+
 void	init_structs(t_data *data);
+
+void    render_weapon(t_data *data);
+int init_weapon(t_data *data);
 
 int		init_game(t_data *data);
 int		init_textures(t_data *data);

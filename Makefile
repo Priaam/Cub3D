@@ -37,7 +37,8 @@ SRCS_CORE   = main.c \
               render/textured_wall.c \
               textures/textures.c \
               player/player.c \
-              bonus/doors/doors.c
+              bonus/doors/doors.c \
+              weapon/weapon.c
 
 SRCS_BONUS  = bonus/minimap/minimap_bonus.c \
               bonus/events/events.c
