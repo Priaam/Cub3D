@@ -6,51 +6,11 @@
 /*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:55:58 by ylebee            #+#    #+#             */
-/*   Updated: 2026/10/14 16:06:56 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/14 17:52:14 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
-// int init_weapon(t_data *data)
-// {
-//     data->weapon.img = mlx_xpm_file_to_image(
-//             data->mlx_ptr,
-//             "./textures/arme.xpm",
-//             &data->weapon.width,
-//             &data->weapon.height);
-//     if (!data->weapon.img)
-//         return (1);
-//     return (0);
-// }
-
-// void	render_weapon(t_data *data)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	if (!data->weapon.img)
-// 		return ;
-// 	x = (WIDTH - data->weapon.width) / 2;
-// 	y = (HEIGHT - data->weapon.height) / 2;
-// 	mlx_put_image_to_window(data->mlx_ptr,
-// 		data->win_ptr, data->weapon.img, x, y);
-// }
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   weapon.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/14 12:55:58 by ylebee            #+#    #+#             */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "Cub3d.h"
-
-
 
 int	init_weapon(t_data *data)
 {

@@ -33,11 +33,16 @@ SRCS_CORE   = main.c \
               utils/graphics_utils.c \
               utils/clean_exit.c \
               render/raycast.c \
+              render/raycast_utiles.c \
               render/render.c \
+              render/render_utiles.c \
               render/textured_wall.c \
+              render/textured_walls_utiles.c \
               textures/textures.c \
               player/player.c \
+              player/player_utils.c \
               bonus/doors/doors.c \
+              bonus/doors/doors_utiles.c \
               weapon/weapon.c
 
 SRCS_BONUS  = bonus/minimap/minimap_bonus.c \

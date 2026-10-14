@@ -46,8 +46,8 @@ static int	parse_bonus_data(t_map *map, char *line)
 	(void)line;
 	return (1);
 }
-#endif
 
+#endif
 
 int	parse_data_status(t_map *map, char *line)
 {

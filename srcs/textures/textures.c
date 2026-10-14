@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                       :::      ::::::::    */
-/*   textures.c                                        :+:      :+:    :+:    */
-/*                                                   +:+ +:+         +:+      */
-/*   By: username <username@student.42tokyo.jp>    #+#  +:+       +#+         */
-/*                                               +#+#+#+#+#+   +#+            */
-/*   Created: 2026/10/09 18:01:37 by username         #+#    #+#              */
-/*   Updated: 2026/10/11 20:33:37 by username        ###   ########.fr        */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/09 18:01:37 by username          #+#    #+#             */
+/*   Updated: 2026/10/14 18:34:27 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static int	load_texture(t_data *data, t_texture *texture, char *path)
 {
 	texture->img = mlx_xpm_file_to_image(data->mlx_ptr, path, &texture->width,
-		&texture->height);
+			&texture->height);
 	if (!texture->img)
 		return (0);
 	texture->pixels = mlx_get_data_addr(texture->img, &texture->bpp,
-		&texture->line_len, &texture->endian);
+			&texture->line_len, &texture->endian);
 	return (1);
 }
 
@@ -69,4 +69,6 @@ void	free_textures(t_data *data)
 			mlx_destroy_image(data->mlx_ptr, data->textures[i].img);
 		i++;
 	}
+	if (data->weapon.img)
+		mlx_destroy_image(data->mlx_ptr, data->weapon.img);
 }

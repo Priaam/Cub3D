@@ -199,14 +199,27 @@ int		get_max_width_arr(char **map_grid);
 void	ft_clear_image(t_data *data);
 
 void	rotate_camera(t_data *data, double angle);
+void	player_move_coordinates(t_data *data, double *move_x, double *move_y);
 int		update_player(t_data *data);
 int		is_walkable(t_data *data, double x, double y);
 
 int		render(void *param);
 void	render_3d(t_data *data);
+
+int		texture_side(t_dda *ray, t_hit *hit);
+int		texture_x(t_data *data, t_dda *ray, t_hit *hit);
 void	draw_textured_wall(t_data *data, t_dda *ray, t_hit *hit, int x);
+
+void	init_delta_dist(t_dda *dda);
+void	init_side_dist(t_data *data, t_dda *dda);
+t_dda	init_dda(t_data *data, t_dda ray);
+
 t_hit	dda(t_data *data, t_dda ray);
+
+void	draw_background(t_data *data, int x, t_hit *hit);
+
 void	render_minimap(t_data *data);
+void	set_wall_limits(t_hit *hit);
 void	draw_player_minimap(t_data *data);
 
 int		key_press(int keycode, void *param);
@@ -217,6 +230,7 @@ int		ft_exit(void *param);
 int		interact_door(t_data *data);
 int		check_sliding_door(t_data *data, t_dda *dda, t_dda *ray, t_hit *hit);
 double	get_door_offset(t_data *data, int x, int y);
-void	update_doors(t_data *data);
+void	update_doors(t_data *data, int i);
+int		find_door_slot(t_data *data, int tx, int ty);
 
 #endif

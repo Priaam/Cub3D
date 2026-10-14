@@ -50,11 +50,13 @@ int	collect_map_lines(int fd, t_list **map_list, char *first_line)
 			free(line);
 		}
 		else if (map_ended || map_line_type(line) == 0)
-			return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
+			return (discard_remaining_lines(fd), free(line),
+				ft_lstclear(map_list, &free), 0);
 		else
 		{
 			if (!add_map_line(map_list, line))
-				return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
+				return (discard_remaining_lines(fd),
+					free(line), ft_lstclear(map_list, &free), 0);
 		}
 		line = get_next_line(fd);
 	}

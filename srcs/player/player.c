@@ -6,7 +6,7 @@
 /*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/14 12:30:50 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/14 18:18:18 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,39 +48,18 @@ void	rotate_camera(t_data *data, double angle)
 
 static void	move_player(t_data *data, double *x, double *y)
 {
-	double	speed;
 	double	move_x;
 	double	move_y;
 	double	length;
 
-	speed = SPEED;
 	move_x = 0;
 	move_y = 0;
-	if (data->key_w)
-	{
-		move_x += data->dir_x;
-		move_y += data->dir_y;
-	}
-	if (data->key_s)
-	{
-		move_x -= data->dir_x;
-		move_y -= data->dir_y;
-	}
-	if (data->key_d)
-	{
-		move_x -= data->dir_y;
-		move_y += data->dir_x;
-	}
-	if (data->key_a)
-	{
-		move_x += data->dir_y;
-		move_y -= data->dir_x;
-	}
+	player_move_coordinates(data, &move_x, &move_y);
 	length = sqrt(move_x * move_x + move_y * move_y);
 	if (length > 0)
 	{
-		move_x = (move_x / length) * speed;
-		move_y = (move_y / length) * speed;
+		move_x = (move_x / length) * SPEED;
+		move_y = (move_y / length) * SPEED;
 	}
 	*x += move_x;
 	*y += move_y;

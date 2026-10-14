@@ -3,26 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 18:30:31 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 19:05:15 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:55:10 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
 #ifdef BONUS
+
 static int	is_bonus_door(char c)
 {
 	return (c == 'D');
 }
+
 #else
+
 static int	is_bonus_door(char c)
 {
 	(void)c;
 	return (0);
 }
+
 #endif
 
 int	map_line_type(char *line)
