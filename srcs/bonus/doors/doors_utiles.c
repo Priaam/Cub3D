@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors_utiles.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 18:41:16 by ylebee            #+#    #+#             */
-/*   Updated: 2026/10/14 18:43:30 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/15 10:28:07 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ int	interact_door(t_data *data)
 	return (0);
 }
 
-void	update_doors(t_data *data)
+void	update_doors(t_data *data, int i)
 {
 	(void)data;
+	(void)i;
 }
 
 #endif
