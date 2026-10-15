@@ -43,6 +43,7 @@ SRCS_CORE   = main.c \
               player/player_utils.c \
               bonus/doors/doors.c \
               bonus/doors/doors_utiles.c \
+              bonus/laser/laser.c \
               weapon/weapon.c
 
 SRCS_BONUS  = bonus/minimap/minimap_bonus.c \

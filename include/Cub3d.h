@@ -14,7 +14,8 @@
 
 # define SPEED 0.1
 
-# define WEAPON_SCALE 3
+# define WEAPON_SCALE 2
+# define LASER_FRAMES 10
 
 # define KEY_W 119
 # define KEY_A 97
@@ -30,6 +31,8 @@ typedef struct s_weapon
     void    *img;
     int     width;
     int     height;
+	int		laser_frame;
+	double	laser_distance;
 }   t_weapon;
 
 typedef struct s_texture
@@ -170,7 +173,9 @@ typedef struct s_tex_column
 void	init_structs(t_data *data);
 
 void    render_weapon(t_data *data);
-int init_weapon(t_data *data);
+int 	init_weapon(t_data *data);
+int		laser_click(int button, int x, int y, void *param);
+void	render_laser(t_data *data);
 
 int		init_game(t_data *data);
 int		init_textures(t_data *data);

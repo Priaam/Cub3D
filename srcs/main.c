@@ -6,7 +6,7 @@
 /*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:31:33 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/14 18:33:02 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/15 14:27:03 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	main(int argc, char **argv)
 		return (free_game(&data), 1);
 	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 	mlx_loop_hook(data.mlx_ptr, render, &data);
+	#ifdef BONUS
+		mlx_hook(data.win_ptr, 4, 1L << 2, laser_click, &data);
+	#endif
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 1L << 1, key_release, &data);
 	mlx_hook(data.win_ptr, 17, 0, ft_exit, &data);
