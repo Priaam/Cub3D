@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:04 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:34:18 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:18:18 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	is_wall(t_data *data, double x, double y)
 	if (x < 0 || y < 0 || y >= data->map.height
 		|| x >= data->map.width)
 		return (1);
-	return (data->map.map_grid[(int)y][(int)x] == '1');
+	return (data->map.map_grid[(int)y][(int)x] == '1'
+				|| data->map.map_grid[(int)y][(int)x] == 'D');
 }
 
 int	is_walkable(t_data *data, double x, double y)
@@ -47,39 +48,18 @@ void	rotate_camera(t_data *data, double angle)
 
 static void	move_player(t_data *data, double *x, double *y)
 {
-	double	speed;
 	double	move_x;
 	double	move_y;
 	double	length;
 
-	speed = 0.05;
 	move_x = 0;
 	move_y = 0;
-	if (data->key_w)
-	{
-		move_x += data->dir_x;
-		move_y += data->dir_y;
-	}
-	if (data->key_s)
-	{
-		move_x -= data->dir_x;
-		move_y -= data->dir_y;
-	}
-	if (data->key_d)
-	{
-		move_x -= data->dir_y;
-		move_y += data->dir_x;
-	}
-	if (data->key_a)
-	{
-		move_x += data->dir_y;
-		move_y -= data->dir_x;
-	}
+	player_move_coordinates(data, &move_x, &move_y);
 	length = sqrt(move_x * move_x + move_y * move_y);
 	if (length > 0)
 	{
-		move_x = (move_x / length) * speed;
-		move_y = (move_y / length) * speed;
+		move_x = (move_x / length) * SPEED;
+		move_y = (move_y / length) * SPEED;
 	}
 	*x += move_x;
 	*y += move_y;
@@ -91,9 +71,9 @@ int	update_player(t_data *data)
 	double	new_y;
 
 	if (data->key_left)
-		rotate_camera(data, -0.05);
+		rotate_camera(data, -0.025);
 	if (data->key_right)
-		rotate_camera(data, 0.05);
+		rotate_camera(data, 0.025);
 	new_x = data->player_x;
 	new_y = data->player_y;
 	move_player(data, &new_x, &new_y);

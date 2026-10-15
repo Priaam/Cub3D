@@ -12,13 +12,25 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
+# define SPEED 0.1
+
+# define WEAPON_SCALE 3
+
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_SPACE 32
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
+
+typedef struct s_weapon
+{
+    void    *img;
+    int     width;
+    int     height;
+}   t_weapon;
 
 typedef struct s_texture
 {
@@ -31,12 +43,22 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	double	offset; // De 0.0 (fermée) à 1.0 (ouverte)
+	int		state;  // 1 (en ouverture), -1 (en fermeture), 0 (inactif)
+}	t_door;
+
 typedef enum e_type
 {
 	NO,
 	SO,
 	WE,
 	EA,
+	DOOR,
 	F,
 	C,
 	DATA_COUNT
@@ -70,7 +92,11 @@ typedef struct s_data
 
 	t_img		img;
 
-	t_texture	textures[4];
+	t_texture	textures[5];
+
+	t_door		doors[32];
+
+	t_weapon	weapon;
 
 	int			coef_minimap;
 	int			coef_player;
@@ -123,6 +149,8 @@ typedef struct s_hit
 
 	int		draw_start;
 	int		draw_end;
+
+	int		is_door;
 }	t_hit;
 
 typedef struct s_tex_column
@@ -138,7 +166,11 @@ typedef struct s_tex_column
 	double	tex_pos;
 }	t_tex_column;
 
+
 void	init_structs(t_data *data);
+
+void    render_weapon(t_data *data);
+int init_weapon(t_data *data);
 
 int		init_game(t_data *data);
 int		init_textures(t_data *data);
@@ -153,8 +185,9 @@ int		check_and_fill(t_map *map, t_type type, char *value);
 int		parse_data_status(t_map *map, char *line);
 void	discard_remaining_lines(int fd);
 int		check_xpm_header(char *path);
-int		fill_map_grid(int fd, t_map *map);
-int		collect_map_lines(int fd, t_list **map_list);
+int		map_line_type(char *line);
+int		fill_map_grid(int fd, t_map *map, char *first_line);
+int		collect_map_lines(int fd, t_list **map_list, char *first_line);
 int		build_map_grid(t_map *map, t_list *map_list, int line_count);
 int		is_valid_texture(t_map *map);
 int		flood_fill(t_data *data);
@@ -166,18 +199,38 @@ int		get_max_width_arr(char **map_grid);
 void	ft_clear_image(t_data *data);
 
 void	rotate_camera(t_data *data, double angle);
+void	player_move_coordinates(t_data *data, double *move_x, double *move_y);
 int		update_player(t_data *data);
 int		is_walkable(t_data *data, double x, double y);
 
 int		render(void *param);
 void	render_3d(t_data *data);
+
+int		texture_side(t_dda *ray, t_hit *hit);
+int		texture_x(t_data *data, t_dda *ray, t_hit *hit);
 void	draw_textured_wall(t_data *data, t_dda *ray, t_hit *hit, int x);
+
+void	init_delta_dist(t_dda *dda);
+void	init_side_dist(t_data *data, t_dda *dda);
+t_dda	init_dda(t_data *data, t_dda ray);
+
 t_hit	dda(t_data *data, t_dda ray);
+
+void	draw_background(t_data *data, int x, t_hit *hit);
+
 void	render_minimap(t_data *data);
+void	set_wall_limits(t_hit *hit);
 void	draw_player_minimap(t_data *data);
 
 int		key_press(int keycode, void *param);
 int		key_release(int keycode, void *param);
+int		mouse_move(void *param);
 int		ft_exit(void *param);
+
+int		interact_door(t_data *data);
+int		check_sliding_door(t_data *data, t_dda *dda, t_dda *ray, t_hit *hit);
+double	get_door_offset(t_data *data, int x, int y);
+void	update_doors(t_data *data, int i);
+int		find_door_slot(t_data *data, int tx, int ty);
 
 #endif

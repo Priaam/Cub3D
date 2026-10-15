@@ -3,45 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 13:49:53 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 19:01:41 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
-
-static void	draw_background(t_data *data, int x, t_hit *hit)
-{
-	int	y;
-
-	y = 0;
-	while (y < hit->draw_start)
-	{
-		ft_put_pixel(&data->img, x, y, data->map.c_color);
-		y++;
-	}
-	y = hit->draw_end + 1;
-	while (y < HEIGHT)
-	{
-		ft_put_pixel(&data->img, x, y, data->map.f_color);
-		y++;
-	}
-}
-
-static void	set_wall_limits(t_hit *hit)
-{
-	int	line_height;
-
-	line_height = (int)(HEIGHT / hit->perp_wall_dist);
-	hit->draw_start = HEIGHT / 2 - line_height / 2;
-	hit->draw_end = HEIGHT / 2 + line_height / 2;
-	if (hit->draw_start < 0)
-		hit->draw_start = 0;
-	if (hit->draw_end >= HEIGHT)
-		hit->draw_end = HEIGHT - 1;
-}
 
 static void	render_column(t_data *data, int x)
 {
@@ -74,8 +43,13 @@ void	render_3d(t_data *data)
 
 static void	render_bonus_features(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	render_minimap(data);
 	draw_player_minimap(data);
+	update_doors(data, i);
+	mouse_move(data);
 }
 
 #else
@@ -97,5 +71,6 @@ int	render(void *param)
 	render_bonus_features(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img, 0, 0);
+	render_weapon(data);
 	return (0);
 }

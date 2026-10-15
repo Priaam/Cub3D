@@ -6,7 +6,7 @@
 /*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 20:04:24 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:22:55 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/11 18:30:07 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	add_map_line(t_list **map_list, char *line)
 	return (1);
 }
 
-int	fill_map_grid(int fd, t_map *map)
+int	fill_map_grid(int fd, t_map *map, char *first_line)
 {
 	t_list	*map_list;
 	int		line_count;
 
 	map_list = NULL;
-	line_count = collect_map_lines(fd, &map_list);
+	line_count = collect_map_lines(fd, &map_list, first_line);
 	if (line_count == 0)
 		return (0);
 	return (build_map_grid(map, map_list, line_count));

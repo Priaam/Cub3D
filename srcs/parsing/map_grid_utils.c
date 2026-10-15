@@ -12,27 +12,6 @@
 
 #include "Cub3d.h"
 
-static int	map_line_type(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
-		i++;
-	if (!line[i])
-		return (1);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != '1' && line[i] != '0' && line[i] != ' '
-			&& line[i] != '\n' && line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'E' && line[i] != 'W')
-			return (0);
-		i++;
-	}
-	return (2);
-}
-
 static int	get_max_width_lst(t_list *map_list)
 {
 	int		max_len;
@@ -55,13 +34,13 @@ static int	get_max_width_lst(t_list *map_list)
 	return (max_len);
 }
 
-int	collect_map_lines(int fd, t_list **map_list)
+int	collect_map_lines(int fd, t_list **map_list, char *first_line)
 {
 	int		map_ended;
 	char	*line;
 
 	map_ended = 0;
-	line = get_next_line(fd);
+	line = first_line;
 	while (line)
 	{
 		if (map_line_type(line) == 1)
@@ -71,11 +50,13 @@ int	collect_map_lines(int fd, t_list **map_list)
 			free(line);
 		}
 		else if (map_ended || map_line_type(line) == 0)
-			return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
+			return (discard_remaining_lines(fd), free(line),
+				ft_lstclear(map_list, &free), 0);
 		else
 		{
 			if (!add_map_line(map_list, line))
-				return (discard_remaining_lines(fd), free(line), ft_lstclear(map_list, &free), 0);
+				return (discard_remaining_lines(fd),
+					free(line), ft_lstclear(map_list, &free), 0);
 		}
 		line = get_next_line(fd);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:55:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:29:19 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:53:20 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int	flood_fill(t_data *data)
 {
 	if (!find_map_player(data, data->map.map_grid))
 		return (0);
-	return (validate_map_copy(&data->map, (int)data->player_x, (int)data->player_y));
+	return (validate_map_copy(&data->map, (int)data->player_x,
+			(int)data->player_y));
 }

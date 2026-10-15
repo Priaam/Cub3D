@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:31:33 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:24:13 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:33:02 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 		return (free_map_data(&data.map), 1);
 	if (!init_game(&data))
 		return (free_game(&data), 1);
+	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 1L << 1, key_release, &data);

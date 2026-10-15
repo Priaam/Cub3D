@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/11 14:24:45 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:26:19 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:32:05 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_map_data(t_map *map)
 	int	i;
 
 	i = 0;
-	while (i <= 5)
+	while (i < DATA_COUNT)
 	{
 		if (map->data[i])
 			free(map->data[i]);

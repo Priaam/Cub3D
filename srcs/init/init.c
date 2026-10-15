@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:00:20 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 14:30:06 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 18:01:48 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
+#include <stdio.h>
 
 static void	set_direction(t_data *data)
 {
@@ -49,6 +50,11 @@ int	init_game(t_data *data)
 			&data->img.line_len, &data->img.endian);
 	if (!init_textures(data))
 		return (0);
+	if (init_weapon(data) != 0)
+	{
+		printf("Erreur : chargement de l'arme impossible\n");
+		return (0);
+	}
 	set_direction(data);
 	data->coef_minimap = TILE_SIZE / get_max_width_arr(data->map.map_grid);
 	if (data->coef_minimap < 1)

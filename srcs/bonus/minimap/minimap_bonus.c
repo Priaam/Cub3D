@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_render.c                                   :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/22 01:07:20 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/09 18:36:25 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/10/14 16:13:54 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ static void	draw_minimap_pixel(t_data *data, int x, int y, int radius)
 			+ (double)(y - radius) / data->coef_minimap);
 	tile = safe_get_tile(data, map_x, map_y);
 	if (tile == '1')
-		ft_put_pixel(&data->img, x, y, 0xffffff);
+		ft_put_pixel(&data->img, x, y, 0x303235);
+	else if (tile == 'D')
+		ft_put_pixel(&data->img, x, y, 0xFF0000);
+	else if (tile == 'O')
+		ft_put_pixel(&data->img, x, y, 0x17AD00);
 	else if (tile != ' ')
-		ft_put_pixel(&data->img, x, y, 0x777777);
+		ft_put_pixel(&data->img, x, y, 0x707B84);
 }
 
 void	render_minimap(t_data *data)
@@ -74,11 +78,11 @@ void	draw_player_minimap(t_data *data)
 	int	i;
 	int	j;
 
-	i = -4;
-	while (i <= 4)
+	i = 0;
+	while (i < 5)
 	{
-		j = -4;
-		while (j <= 4)
+		j = 0;
+		while (j < 5)
 		{
 			ft_put_pixel(&data->img, 90 + j, 90 + i, 0xff2c2c);
 			j++;

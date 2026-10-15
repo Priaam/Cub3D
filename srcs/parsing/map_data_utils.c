@@ -29,6 +29,26 @@ int	check_xpm_header(char *path)
 	return (1);
 }
 
+#ifdef BONUS
+
+static int	parse_bonus_data(t_map *map, char *line)
+{
+	if (!ft_strncmp(line, "DO ", 3))
+		return (check_and_fill(map, DOOR, line + 3));
+	return (1);
+}
+
+#else
+
+static int	parse_bonus_data(t_map *map, char *line)
+{
+	(void)map;
+	(void)line;
+	return (1);
+}
+
+#endif
+
 int	parse_data_status(t_map *map, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3))
@@ -39,6 +59,8 @@ int	parse_data_status(t_map *map, char *line)
 		return (check_and_fill(map, WE, line + 3));
 	if (!ft_strncmp(line, "EA ", 3))
 		return (check_and_fill(map, EA, line + 3));
+	if (!parse_bonus_data(map, line))
+		return (0);
 	if (!ft_strncmp(line, "F ", 2))
 		return (check_and_fill(map, F, line + 2));
 	if (!ft_strncmp(line, "C ", 2))
