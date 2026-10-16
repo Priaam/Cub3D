@@ -6,7 +6,7 @@
 /*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/14 19:01:41 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/10/15 14:30:29 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	render_bonus_features(t_data *data)
 	draw_player_minimap(data);
 	update_doors(data, i);
 	mouse_move(data);
+	update_player(data);
+	render_laser(data);
 }
 
 #else

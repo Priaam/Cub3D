@@ -15,7 +15,7 @@
 int	init_weapon(t_data *data)
 {
 	data->weapon.img = mlx_xpm_file_to_image(data->mlx_ptr,
-			"./textures/arme.xpm", &data->weapon.width,
+			"./textures/arme_fps_centree.xpm", &data->weapon.width,
 			&data->weapon.height);
 	if (!data->weapon.img)
 		return (1);
