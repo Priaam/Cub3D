@@ -75,9 +75,10 @@ int	interact_door(t_data *data)
 	return (0);
 }
 
-void	update_doors(t_data *data)
+void	update_doors(t_data *data, int i)
 {
 	(void)data;
+	(void)i;
 }
 
 #endif

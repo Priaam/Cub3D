@@ -1,5 +1,0 @@
-objs_bonus/init/init.o: srcs/init/init.c include/Cub3d.h \
- libs/Libft/include/libft.h libs/minilibx-linux/mlx.h
-include/Cub3d.h:
-libs/Libft/include/libft.h:
-libs/minilibx-linux/mlx.h:
