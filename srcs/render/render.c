@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/09 18:01:25 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/15 14:30:29 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/11/23 15:18:43 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void	render_bonus_features(t_data *data)
 	render_minimap(data);
 	draw_player_minimap(data);
 	update_doors(data, i);
+	render_weapon(data);
 	mouse_move(data);
-	update_player(data);
 	render_laser(data);
 }
 
@@ -73,6 +73,5 @@ int	render(void *param)
 	render_bonus_features(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img, 0, 0);
-	render_weapon(data);
 	return (0);
 }

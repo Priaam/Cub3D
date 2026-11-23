@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/23 14:57:02 by ylebee            #+#    #+#             */
+/*   Updated: 2026/11/23 15:07:23 by ylebee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -5,18 +17,14 @@
 # include "fcntl.h"
 # include "mlx.h"
 # include "math.h"
-
 # define TILE_SIZE 400
 # define WIDTH 1920
 # define HEIGHT 1080
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-
 # define SPEED 0.1
-
 # define WEAPON_SCALE 2
 # define LASER_FRAMES 10
-
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -28,12 +36,12 @@
 
 typedef struct s_weapon
 {
-    void    *img;
-    int     width;
-    int     height;
+	void	*img;
+	int		width;
+	int		height;
 	int		laser_frame;
 	double	laser_distance;
-}   t_weapon;
+}	t_weapon;
 
 typedef struct s_texture
 {
@@ -46,13 +54,12 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
-
 typedef struct s_door
 {
 	int		x;
 	int		y;
-	double	offset; // De 0.0 (fermée) à 1.0 (ouverte)
-	int		state;  // 1 (en ouverture), -1 (en fermeture), 0 (inactif)
+	double	offset;
+	int		state;
 }	t_door;
 
 typedef enum e_type
@@ -169,11 +176,10 @@ typedef struct s_tex_column
 	double	tex_pos;
 }	t_tex_column;
 
-
 void	init_structs(t_data *data);
 
-void    render_weapon(t_data *data);
-int 	init_weapon(t_data *data);
+void	render_weapon(t_data *data);
+int		init_weapon(t_data *data);
 int		laser_click(int button, int x, int y, void *param);
 void	render_laser(t_data *data);
 
@@ -238,4 +244,6 @@ double	get_door_offset(t_data *data, int x, int y);
 void	update_doors(t_data *data, int i);
 int		find_door_slot(t_data *data, int tx, int ty);
 
+void	draw_disk(t_data *data, int x, int y, int radius);
+void	laser_beam(t_data *data, int frame);
 #endif
