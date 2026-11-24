@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <yanislebee@gmail.com>              +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 16:55:12 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/14 18:53:20 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/11/24 17:33:16 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Cub3d.h>
 
-static void	free_map_copy(char **map_copy);
+static void	free_map_copy(char **map_copy)
+{
+	int	i;
+
+	i = 0;
+	if (!map_copy)
+		return ;
+	while (map_copy[i])
+	{
+		free(map_copy[i]);
+		i++;
+	}
+	free(map_copy);
+}
 
 static char	**copy_map(t_map *map)
 {
@@ -36,21 +49,6 @@ static char	**copy_map(t_map *map)
 	}
 	copy[i] = NULL;
 	return (copy);
-}
-
-static void	free_map_copy(char **map_copy)
-{
-	int	i;
-
-	i = 0;
-	if (!map_copy)
-		return ;
-	while (map_copy[i])
-	{
-		free(map_copy[i]);
-		i++;
-	}
-	free(map_copy);
 }
 
 static int	check_flood_fill(char **map_copy, int x, int y, t_map *map)
