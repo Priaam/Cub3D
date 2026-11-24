@@ -26,6 +26,7 @@ SRCS_CORE   = main.c \
               parsing/map_grid.c \
               parsing/map_grid_utils.c \
               parsing/map_grid_utils2.c \
+              parsing/parse_colors_utils.c \
               parsing/parse_colors.c \
               parsing/flood_fill.c \
               parsing/flood_fill_utils.c \

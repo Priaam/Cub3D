@@ -6,7 +6,7 @@
 /*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 14:57:02 by ylebee            #+#    #+#             */
-/*   Updated: 2026/11/23 15:07:23 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/11/24 17:03:42 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define HEIGHT 1080
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define SPEED 0.1
+# define SPEED 0.05
 # define WEAPON_SCALE 2
 # define LASER_FRAMES 10
 # define KEY_W 119
@@ -200,6 +200,7 @@ int		map_line_type(char *line);
 int		fill_map_grid(int fd, t_map *map, char *first_line);
 int		collect_map_lines(int fd, t_list **map_list, char *first_line);
 int		build_map_grid(t_map *map, t_list *map_list, int line_count);
+int		is_rgb_format(char *color);
 int		is_valid_texture(t_map *map);
 int		flood_fill(t_data *data);
 int		find_map_player(t_data *data, char **map_grid);

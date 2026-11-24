@@ -3,33 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 16:10:32 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/10/11 19:28:45 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/11/24 17:00:11 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3d.h"
 
-static int	is_rgb_format(char *color)
+static int	parse_rgb_component(char *component)
 {
 	int	i;
-	int	comma;
+	int	value;
+	int	has_digit;
 
 	i = 0;
-	comma = 0;
-	while (color[i])
+	value = 0;
+	has_digit = 0;
+	while (component[i] == ' ')
+		i++;
+	while (ft_isdigit(component[i]))
 	{
-		if (color[i] == ',')
-			comma++;
-		if (!ft_isdigit(color[i]) && color[i] != ' ' && color[i] != ',')
-			return (0);
+		has_digit = 1;
+		if (value > 25 || (value == 25 && component[i] - '0' > 5))
+			return (-1);
+		value = value * 10 + component[i] - '0';
 		i++;
 	}
-	if (comma != 2)
-		return (0);
-	return (1);
+	while (component[i] == ' ')
+		i++;
+	if (!has_digit || component[i])
+		return (-1);
+	return (value);
 }
 
 static int	rgb_to_int(char **rgb_color)
@@ -38,10 +44,10 @@ static int	rgb_to_int(char **rgb_color)
 	int	g;
 	int	b;
 
-	r = ft_atoi(rgb_color[0]);
-	g = ft_atoi(rgb_color[1]);
-	b = ft_atoi(rgb_color[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	r = parse_rgb_component(rgb_color[0]);
+	g = parse_rgb_component(rgb_color[1]);
+	b = parse_rgb_component(rgb_color[2]);
+	if (r == -1 || g == -1 || b == -1)
 		return (-1);
 	return ((r << 16) | (g << 8) | b);
 }
