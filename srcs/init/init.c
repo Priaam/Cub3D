@@ -51,10 +51,7 @@ int	init_game(t_data *data)
 	if (!init_textures(data))
 		return (0);
 	if (init_weapon(data) != 0)
-	{
-		printf("Erreur : chargement de l'arme impossible\n");
 		return (0);
-	}
 	set_direction(data);
 	data->coef_minimap = TILE_SIZE / get_max_width_arr(data->map.map_grid);
 	if (data->coef_minimap < 1)

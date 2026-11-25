@@ -38,7 +38,8 @@ int	main(int argc, char **argv)
 	if (!parse_map(argv[1], &data))
 		return (free_map_data(&data.map), 1);
 	if (!init_game(&data))
-		return (free_game(&data), 1);
+		return (ft_putstr_fd("Error\nInitialization of the game failed\n", 2),
+			free_game(&data), 1);
 	mlx_mouse_hide(data.mlx_ptr, data.win_ptr);
 	mlx_loop_hook(data.mlx_ptr, render, &data);
 	hook_laser(&data);
