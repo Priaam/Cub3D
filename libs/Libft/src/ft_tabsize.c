@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 15:49:36 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/09/11 16:19:45 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/11/26 13:56:39 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_tabsize(char **tab)
 {
 	int	i;
-	
+
 	i = 0;
 	while (tab[i] != NULL)
 		i++;

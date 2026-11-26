@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by ylebee, peserre-s.*
+*This project has been created as part of the 42 curriculum by ylebee, pserre-s.*
 
 # cub3D
 
@@ -66,9 +66,13 @@ sudo apt install build-essential libx11-dev libxext-dev
 
 The repository contains the Libft sources in `libs/Libft/`. The Makefile builds Libft and MiniLibX before linking the game. Make sure the MiniLibX source directory is present at the path expected by the Makefile: `libs/minilibx-linux/`.
 
-## Compilation
+## Instruction
 
-Clone or download the repository, then run the commands from the project root.
+Clone or download the repository.
+
+make or make bonus
+
+./cub3D maps/"map name".cub
 
 ### Mandatory
 

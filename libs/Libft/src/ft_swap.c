@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pserre-s <priaserre@gmail.com>             +#+  +:+       +#+        */
+/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 16:15:07 by pserre-s          #+#    #+#             */
-/*   Updated: 2026/06/03 16:15:41 by pserre-s         ###   ########.fr       */
+/*   Updated: 2026/11/26 13:55:46 by ylebee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_swap(char *a, char *b)
 {
-	char temp;
+	char	temp;
 
 	temp = *a;
 	*a = *b;
