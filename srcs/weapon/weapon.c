@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylebee <ylebee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pserre-s <pserre-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:55:58 by ylebee            #+#    #+#             */
-/*   Updated: 2026/11/23 15:02:39 by ylebee           ###   ########.fr       */
+/*   Updated: 2026/11/26 14:35:37 by pserre-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	init_weapon(t_data *data)
 {
+	if (!check_xpm_header("./textures/arme.xpm"))
+		return (1);
 	data->weapon.img = mlx_xpm_file_to_image(data->mlx_ptr,
 			"./textures/arme.xpm", &data->weapon.width,
 			&data->weapon.height);
